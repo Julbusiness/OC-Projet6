@@ -1,55 +1,55 @@
 function photographerFactory(data) {
-    const { name, city, country, tagline, price, portrait } = data;
+	const { name, city, country, tagline, price, portrait } = data;
 
-    const picture = `assets/photographers/${portrait}`;
-    const localisation = `${city}, ${country}`;
-    const slogan = `${tagline}`;
-    const pricePerDay = `${price}€/jours`;
+	const picture = `assets/photographers/${portrait}`;
+	const localisation = `${city}, ${country}`;
+	const slogan = `${tagline}`;
+	const pricePerDay = `${price}€/jours`;
 
-    function getUserCardDOM() {
+	function getUserCardDOM() {
+		// Création de l'article dans le DOM
+		const article = document.createElement("article");
 
-        // Création de l'article dans le DOM
-        const article = document.createElement( 'article' );
+		// Création du lien contenant le h2 et l'image dans le DOM
+		const link = document.createElement("a");
+		link.setAttribute("href", "#");
+		link.className = "link";
+		link.setAttribute("alt", `page de ${name}`);
 
-        // Création du lien contenant le h2 et l'image dans le DOM
-        const link = document.createElement( 'a');
-        link.setAttribute("href", "#");
-        link.className = 'link';
-        link.setAttribute("alt", name);
+		// création de l'image dans le DOM
+		const img = document.createElement("img");
+		img.setAttribute("src", picture);
+		img.setAttribute("alt", `${name}`);
+		img.className = "image";
 
-        // création de l'image dans le DOM
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        img.className = 'image';
-        
-        // Création du h2 dans le DOM
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = name;
+		// Création du h2 dans le DOM
+		const h2 = document.createElement("h2");
+		h2.textContent = name;
 
-        // Création de l'élément P pour la localisation dans le DOM
-        const p_localisation = document.createElement( 'p' );
-        p_localisation.className = 'localisation';
-        p_localisation.textContent = localisation;
+		// Création de l'élément P pour la localisation dans le DOM
+		const p_localisation = document.createElement("p");
+		p_localisation.className = "localisation";
+		p_localisation.textContent = localisation;
 
-        // Création de l'élément P pour le slogan dans le DOM
-        const p_slogan = document.createElement( 'p' );
-        p_slogan.className = 'slogan';
-        p_slogan.textContent = slogan;
+		// Création de l'élément P pour le slogan dans le DOM
+		const p_slogan = document.createElement("p");
+		p_slogan.className = "slogan";
+		p_slogan.textContent = slogan;
 
-        // Création de l'élément P pour le prix dans le DOM
-        const p_price = document.createElement( 'p' );
-        p_price.className = 'price';
-        p_price.textContent = pricePerDay;
+		// Création de l'élément P pour le prix dans le DOM
+		const p_price = document.createElement("p");
+		p_price.className = "price";
+		p_price.textContent = pricePerDay;
 
-        // Mise en place de la structure du DOM
-        article.appendChild(link);
-        link.appendChild(img);
-        link.appendChild(h2);
-        article.appendChild(p_localisation);
-        article.appendChild(p_slogan);
-        article.appendChild(p_price);
+		// Mise en place de la structure du DOM
+		article.appendChild(link);
+		link.appendChild(img);
+		link.appendChild(h2);
+		article.appendChild(p_localisation);
+		article.appendChild(p_slogan);
+		article.appendChild(p_price);
 
-        return (article);
-    }
-    return { name, picture, getUserCardDOM }
+		return article;
+	}
+	return { name, picture, localisation, slogan, pricePerDay, getUserCardDOM };
 }
