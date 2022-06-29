@@ -22,7 +22,7 @@
 
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button">Contactez-moi</button>
       </div>
     </main>
 
@@ -30,7 +30,7 @@
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" alt="Close"/>
+          <img src="assets/icons/close.svg" class="btnClose" alt="Close"/>
         </header>
 				<form>
 					<div>
@@ -42,9 +42,12 @@
 			</div>
 		</div>
     
-    <script src="scripts/utils/constructor.js"></script>
-    <script src="scripts/factories/media.js"></script>
-    <script src="scripts/pages/photographerMedia.js"></script>
+    <script src="js/models/Photographer.js"></script>
+    <script src="js/models/Media.js"></script>
+    <script src="js/factories/mediaFactory.js"></script>
+    <script src="js/templates/media.js"></script>
+    <script src="js/utils/contactForm.js"></script>
+
   
   </body>
 </html>

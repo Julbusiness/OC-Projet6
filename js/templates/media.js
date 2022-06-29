@@ -1,6 +1,5 @@
 // Création du tableau vide pour recevoir les elements des chaque photographe
 let arrPhotographer = [];
-let photographers;
 
 // Récupération de l'id du photographe dans l'URL
 const url = new URL(location.href);
@@ -14,32 +13,39 @@ if (searchParams.has("id")) {
 // console.log(url)
 
 // Récupération des infos de chaque photographes et placement dans un tableau avec ses medias afin de mieux les utiliser par la suite
-async function getMedias() {
+async function getMedias(photographers) {
 	let currentPhotographer;
 	let currentMedia;
 
-	for (const elPhotographer of photographers.photographers) {
-		currentPhotographer = new Photographer();
+	for (const elPhoto of photographers.photographers) {
+		currentPhotographer = new Photographer(
+			elPhoto.id,
+			elPhoto.name,
+			elPhoto.city,
+			elPhoto.country,
+			elPhoto.tagline,
+			elPhoto.price,
+			elPhoto.portrait,
+			elPhoto.description
+		);
 
-		currentPhotographer.id = elPhotographer.id;
-		currentPhotographer.name = elPhotographer.name;
-		currentPhotographer.city = elPhotographer.city;
-		currentPhotographer.country = elPhotographer.country;
-		currentPhotographer.tagline = elPhotographer.tagline;
-		currentPhotographer.portrait = elPhotographer.portrait;
-		currentPhotographer.price = elPhotographer.price;
-		currentPhotographer.description = elPhotographer.description;
 		arrPhotographer.push(currentPhotographer);
 	}
 
 	for (const elements of arrPhotographer) {
 		for (const elMedia of photographers.media) {
 			if (elMedia.photographerId === elements.id) {
-				currentMedia = new Media();
-
-				currentMedia.id = elMedia.id;
-				currentMedia.photographeId = elMedia.photographerId;
-				currentMedia.titre = elMedia.title;
+				currentMedia = new Media(
+					elMedia.id,
+					elMedia.photographerId,
+					elMedia.title,
+					elMedia.image,
+					elMedia.video,
+					elMedia.likes,
+					elMedia.date,
+					elMedia.price,
+					elMedia.description
+				);
 
 				if (elMedia.image === undefined) {
 					currentMedia.video = elMedia.video;
@@ -47,11 +53,8 @@ async function getMedias() {
 					currentMedia.image = elMedia.image;
 				}
 
-				currentMedia.likes = elMedia.likes;
-				currentMedia.date = elMedia.date;
-				currentMedia.prix = elMedia.price;
-				currentMedia.description = elMedia.description;
-				elements.nbLikesTotal += parseInt(currentMedia.likes);
+				elements.nbLikesTotal += parseInt(currentMedia.likes); // a confirmer
+
 				elements.arrMedia.push(currentMedia);
 			}
 		}
@@ -59,7 +62,7 @@ async function getMedias() {
 	return arrPhotographer;
 }
 
-// Affichage dans le DOM des infos sur les pages de photographe de manieère dynamique
+// Affichage dans le DOM des infos sur les pages de photographe de manière dynamique
 async function displayMedia(photographers) {
 	const mainSection = document.querySelector("#main");
 	const header = document.querySelector(".photograph-header");
@@ -116,10 +119,62 @@ async function displayMedia(photographers) {
 			mainSection.appendChild(mediaSection);
 		}
 	});
+
+	//! ATTENTION A Terminer
+	// console.log(photographers) .. je trouve les 6 photographes
+	photographers.forEach((photographer) => {
+		// console.log(photographer) // je trouve les photographes jusqua l'id que je choisi
+		if (photographer.id === parseInt(id)) {
+			// console.log(photographer.arrMedia) // je trouve le bon photographe et ses medias
+
+			const divInfosMedia = document.createElement("div");
+			divInfosMedia.classList.add("container-infosMedia");
+
+			let arrImgVids = [];
+			// console.log(arrImgVids)
+
+			// fonction anonyme qui s'auto execute pour boucler sur les medias
+			(function () {
+				photographer.arrMedia.forEach((media) => {
+					// console.log(media) //me donne tous les medias d'un photographe
+
+					// console.log(media.video) // je recupere le nom de mon image
+
+					if (media.image !== undefined) {
+						const image = document.createElement("img");
+						image.classList.add("media-imgVids");
+						image.setAttribute(
+							"src",
+							`assets/images/${photographer.name}/${media.image}`
+						);
+						divInfosMedia.appendChild(image);
+
+						return arrImgVids.push(media.image);
+						// console.log(media.image)
+					} else {
+						const video = document.createElement("video");
+						video.classList.add("media-imgVids");
+						video.setAttribute('controls','')
+						video.setAttribute(
+							"src",
+							`assets/images/${photographer.name}/${media.video}`
+						);
+						divInfosMedia.appendChild(video);
+
+						return arrImgVids.push(media.video);
+						// console.log(media.video)
+					}
+				});
+			})();
+
+			mainSection.appendChild(divInfosMedia);
+		}
+	});
 }
+//! ------------
 
 // Parcourir le fichier de données JSON
-const getDataMedia = async function () {
+async function getDataMedia (photographers) {
 	const response = await fetch("../../data/photographers.json");
 	photographers = await response.json();
 	arrPhotographer = await getMedias(photographers);
@@ -130,4 +185,4 @@ async function init() {
 	displayMedia(arrPhotographer);
 }
 
-init();
+init().then();
