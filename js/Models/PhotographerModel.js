@@ -1,6 +1,5 @@
-class Photographer {
+export default class PhotographerModel {
 	constructor(data) {
-		
 		this._name = data.name;
 		this._id = data.id;
 		this._city = data.city;
@@ -8,7 +7,15 @@ class Photographer {
 		this._tagline = data.tagline;
 		this._price = data.price;
 		this._portrait = data.portrait;
+		this._portfolio = [];
+
+		this._cardPhotographer = null;
+		this._cardPortfolio = null;
+		this._cardModal = null;
+		this._cardFilter = null;
 	}
+
+	/* --------------------------------- getters -------------------------------- */
 
 	get name() {
 		return this._name;
@@ -36,6 +43,49 @@ class Photographer {
 
 	get portrait() {
 		return `/assets/photographers/${this._portrait}`;
+	}
+
+	get cardPhotographer() {
+		return this._cardPhotographer;
+	}
+
+	get cardPortfolio() {
+		return this._cardPortfolio;
+	}
+	get cardModal() {
+		return this._cardModal;
+	}
+
+	get cardFilter() {
+		return this._cardFilter;
+	}
+
+	get portfolio() {
+		return this._portfolio;
+	}
+
+	get cardPhotographer() {
+		return this._cardPhotographer;
+	}
+
+	get cardPortfolio() {
+		return this._cardPortfolio;
+	}
+
+
+
+	/* --------------------------------- setters -------------------------------- */
+
+	set portfolio(medias) {
+		this._portfolio = medias;
+	}
+
+	set cardPhotographer(card) {
+		this._templatePhotographer = card;
+	}
+
+	set cardPortfolio(card) {
+		this._cardPortfolio = card;
 	}
 
 }

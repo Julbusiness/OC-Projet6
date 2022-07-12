@@ -1,24 +1,38 @@
-class Api {
-
-  constructor(url) {
-      this._url = url
+export default class Api {
+	constructor(url) {
+		this._url = url
+	}
+/* -------------------------------------------------------------------------- */
+  async getPhotographers () {
+    return fetch(this._url)
+      .then(res => res.json())
+      .then(res => res.photographers)
+      .catch(err => console.log('La requete api getPhotographer a échoué : ', err))
   }
+/* -------------------------------------------------------------------------- */
+	async getPhotographerById (userId) {
 
-  async get() {
-      return fetch(this._url)
-          .then(response => response.json())
-          .then(data => data)
-          .catch(err => console.log('an error occurs', err))
+		try {
+
+			const responseApi = await fetch(this._url)
+			// console.log(responseApi)
+			const responseJSON = await responseApi.json()
+			// console.log(responseJSON)
+			const photographer = responseJSON.photographers.filter(photographer => photographer.id === userId)[0]
+			// console.log(photographer)
+			return photographer
+
+		} catch (err) {
+				console.log('La requete api getPhotographerById a échoué : ', err)
+			return null
+		}
+
   }
-}
-
-class PhotographerApi extends Api {
-
-  constructor(url) {
-      super(url)
-  }
-
-  async getPhotographers() {
-      return this.get()
-  }
-}
+/* -------------------------------------------------------------------------- */
+	async getPortfolioByUserId (userId) {
+			return fetch(this._url)
+				.then(res => res.json())
+				.then(res => {return res.media.filter(media => media.photographerId === userId)})				
+				.catch(err => console.log('La requete api getPortfolioById a échoué : ', err))
+		}
+	}

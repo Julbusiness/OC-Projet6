@@ -1,4 +1,4 @@
-class PhotographerCard {
+export default class PhotographerCard {
   constructor(photographer) {
 
       this._photographer = photographer
@@ -14,12 +14,12 @@ class PhotographerCard {
   createPhotographerCard() {
     const photographerCard = `
       <article>
-        <a href="photographer.html?id=${this.photographer.id}" id="${this.photographer.id}" class="link" alt="page de ${this.photographer.name}">
-          <img src="${this.photographer.portrait}" alt="${this.photographer.name}" class="image">
-          <h2>${this.photographer.name}</h2>
-        <p class="location">${this.photographer.city}, ${this.photographer.country}</p>
-        <p class="slogan">${this.photographer.tagline}</p>
-        <p class="price">${this.photographer.price}€/jour</p>
+        <a href="photographer.html?id=${this._photographer.id}" id="${this._photographer.id}" class="link" alt="page de ${this._photographer.name}">
+          <img src="${this._photographer.portrait}" alt="${this._photographer.name}" class="image">
+          <h2>${this._photographer.name}</h2>
+        <p class="location">${this._photographer.city}, ${this._photographer.country}</p>
+        <p class="slogan">${this._photographer.tagline}</p>
+        <p class="price">${this._photographer.price}€/jour</p>
         </a>  
       </article>
       `

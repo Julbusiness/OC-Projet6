@@ -1,11 +1,16 @@
-class MediasFactory {
-  constructor(data, type) {
-    if(type === 'image'){
-      return new Media(data)
-    } else if (type === 'video'){
-      return new Media(data)
+import { Picture } from '../Models/MediaModel'
+import { Video } from '../Models/MediaModel'
+
+export default class MediasFactory {
+	constructor(data) {
+    if (data.image) {
+      // console.log(data.image)
+        return new Picture(data)
+    } else if (data.video) {
+      // console.log(data.video)
+        return new Video(data)
     } else {
-      throw 'type non trouvée, erreur de medias factory'
+      throw 'Unknown format type'
     }
   }
 }

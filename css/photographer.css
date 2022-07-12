@@ -1,10 +1,30 @@
+body {
+    font-family: "DM Sans", sans-serif;
+    margin: auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 400;
+}
+
+header {
+    height: 90px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo {
+    margin: 0;
+}
+
 /* --------------------------------- Header --------------------------------- */
 
-.photograph-header {
+.media-card-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 50px;
+    background: #FAFAFA;
+    height: 320px;
 }
 
 .info-section {
@@ -49,25 +69,78 @@
 
 /* ---------------------------------- Main ---------------------------------- */
 
-.media-imgVids {
+
+.media_wrapper {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.portfolio{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 70px;
+    margin-top: 100px;
+    justify-content: center;
+}
+
+.media-card{
+    margin: 0;
+}
+
+.media-card-cover {
+    position: relative;
     width: 350px;
     height: 300px;
-    margin: 60px;
+}
+
+.media-card-cover img, .media-card-cover video {
+    width: 350px;
+    height: 300px;
+    margin: 15px;
     border-radius: 5px;
     object-fit: cover;
 }
 
-/* ---------------------------------- Modal --------------------------------- */
+.media-card-content {
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+    margin-left: 15px;
+}
 
-#contact_modal {
+.media-card-content-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 300;
+    color: #901c1c;
+}
+
+.media-card-content-like {
+    color: #901c1c;
+    font-size: 24px;
+}
+
+.favorite-input {
     display: none;
 }
 
-.photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+/* .icon {
+    display: block;
+    width: 100px;
+    height: 100px;
+    color: red;
+} */
+
+/* ---------------------------------- Modal --------------------------------- */
+
+.contact_modal {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
+
 
 .contact_button {
     font-size: 20px;
@@ -85,7 +158,8 @@
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 600px;
+    height: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -104,9 +178,12 @@
 }
 
 .modal header h2 {
+    position: relative;
+    top: 40px;
     font-size: 64px;
     font-weight: normal;
-    text-align: center;
+    text-align: left;
+    margin: 0;
 }
 
 form {
@@ -114,6 +191,10 @@ form {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
+}
+
+#text {
+    height: 150px;
 }
 
 form label {
@@ -134,4 +215,41 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+/* ------------------------------- sticky card ------------------------------ */
+.sticky {
+    position: sticky;
+    z-index: 9999;
+    bottom: 0px;
+    left: 20px;
+}
+
+.sticky-card {
+    display: flex;
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    align-items: center;
+    width: 375px;
+    height: 70px;
+    background: #D88876;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.sticky-card span {
+    font-size: 24px;
+    color: #000;
+}
+
+.globalLikes {
+    padding: 5px;
+    margin-left: 20px;
+}
+
+.price {
+    width: 200px;
+    margin: 0;
+    margin-left: 50px;
 }
