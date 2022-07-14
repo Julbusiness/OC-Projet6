@@ -224,7 +224,7 @@ form input {
 /* ------------------------------- sticky card ------------------------------ */
 .sticky {
     position: sticky;
-    z-index: 9999;
+    z-index: 999;
     bottom: 0px;
     left: 20px;
 }
@@ -256,4 +256,74 @@ form input {
     width: 200px;
     margin: 0;
     margin-left: 50px;
+}
+
+/* ---------------------------- portfolio slider ---------------------------- */
+
+.slider-portfolio {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(45deg, #333, #000) ;
+    display: none;
+}
+
+.btn-close-slider {
+    position: absolute;
+    top: 3%;
+    right: 2%;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 30px;
+    outline: none;
+    border: none;
+    background: #000;
+    color: #fff;
+    border: 1px solid #FFF;
+    cursor: pointer;
+}
+
+.btn-left, .btn-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 30px;
+    outline: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn-left {
+    left: 2%;
+}
+
+.btn-right {
+    right: 2%;
+}
+
+.btn-left img,
+.btn-right img {
+    width: 30px;
+    height: 30px;
+}
+.img-visible-slider {
+    width: 60%;
+    height: 700px;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

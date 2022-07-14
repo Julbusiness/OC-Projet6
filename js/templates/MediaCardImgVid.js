@@ -2,7 +2,6 @@ export default class MediaCardImgVid {
 	constructor(media) {
 		this._media = media;
 		this.$wrapperCard = null;
-		this.$wrapperSticky = null;
 	}
 
 	get mediaHtmlElement() {
@@ -19,7 +18,7 @@ export default class MediaCardImgVid {
 		// console.log(this._media)
 
 		const card = `         
-      <a href="${this._media.path}" class="media-card-cover" aria-label="${this._media.description}, agrandir l'image">          
+      <a href="#" class="media-card-cover" aria-label="${this._media.description}, agrandir l'image">          
         <${this._media.format} src="${this._media.path}" alt="${this._media.description}, ${this._media.type}"/>
       </a> 
       <div class="media-card-content">

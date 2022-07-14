@@ -8,6 +8,7 @@ import MediaCardHeader from "../js/templates/MediaCardHeader";
 import MediaCardImgVid from "../js/templates/MediaCardImgVid";
 import PhotographerCard from "../js/templates/PhotographerCard";
 import MediaCardSticky from "../js/templates/MediaCardSticky";
+import MediaSlider from "../js/templates/MediaSlider";
 
 /* ------------------------------ fonction Init ----------------------------- */
 
@@ -18,6 +19,7 @@ async function init() {
 	const $mediaContactWrapper = document.querySelector(".contact_modal");
 	const $portfolioWrapper = document.querySelector(".portfolio");
 	const $stickyWrapper = document.querySelector(".sticky");
+	const $sliderWrapper = document.querySelector(".portfolio_modal");
 
 	/* --------------- if si on se trouve sur la page d'accueil -------------- */
 
@@ -76,7 +78,6 @@ async function init() {
 		const media = new MediaModel(AllMedias);
 
 		AllMedias.forEach((media) => {
-			// console.log(media.image)
 			const Template = new MediaCardImgVid(media);
 			$portfolioWrapper.appendChild(Template.createCardMedia());
 		});
@@ -128,25 +129,80 @@ async function init() {
 				keyCode === 27
 			) {
 				onCloseModal();
-			} 
+			}
 		});
 
 		// je recupere les données rentrées en console.log
-		const sendBtn = document.querySelector('#send')
-		const inputs = document.querySelectorAll('.input-recup')
+		const sendBtn = document.querySelector("#send");
+		const inputs = document.querySelectorAll(".input-recup");
 		// console.log(inputs)
 
 		sendBtn.addEventListener("click", (e) => {
-			e.preventDefault
+			e.preventDefault;
 
-			inputs.forEach((input => {
-				console.log(input.value)
-			}))
-		})
-
+			inputs.forEach((input) => {
+				console.log(input.value);
+			});
+		});
 
 		/* ---------------------- création de la partie sticky ---------------------- */
 		const TemplateSticky = new MediaCardSticky(photographer, media);
 		$stickyWrapper.appendChild(TemplateSticky.createCardSticky());
+
+		/* -------------------------- le slider des medias -------------------------- */
+		AllMedias.forEach((media) => {
+			const TemplateSlider = new MediaSlider(media);
+			$sliderWrapper.appendChild(TemplateSlider.createSliderMedia());
+		});
+
+		const sliderPortfolio = document.querySelector(".slider-portfolio");
+		const srcInProgressSlider = document.querySelector(".img-visible-slider");
+		const allMediasPortfolio = Array.from(
+			document.querySelectorAll(".media-card img, .media-card video")
+		);
+		console.log(allMediasPortfolio)
+		const leftPortfolio = document.querySelector(".btn-left");
+		const rightPortfolio = document.querySelector(".btn-right");
+		const closePortfolio = document.querySelector(".btn-close-slider");
+
+		let photoInProgress;
+		let indexInProgress;
+
+		allMediasPortfolio.forEach((item) => {
+			item.addEventListener("click", (e) => {
+				sliderPortfolio.style.display = "block";
+				srcInProgressSlider.src = e.target.src;
+				photoInProgress = e.target;
+				indexInProgress = allMediasPortfolio.indexOf(photoInProgress);
+			});
+		});
+
+		rightPortfolio.addEventListener("click", () => {
+			if (indexInProgress === allMediasPortfolio.length - 1) {
+				indexInProgress = 0;
+				srcInProgressSlider.src = allMediasPortfolio[indexInProgress].src;
+				photoInProgress = allMediasPortfolio[indexInProgress].return;
+			}
+
+			srcInProgressSlider.src = allMediasPortfolio[indexInProgress + 1].src;
+			photoInProgress = allMediasPortfolio[indexInProgress + 1];
+			indexInProgress = allMediasPortfolio.indexOf(photoInProgress);
+		});
+
+		leftPortfolio.addEventListener("click", () => {
+			if (indexInProgress === 0) {
+				indexInProgress = allMediasPortfolio.length - 1;
+				srcInProgressSlider.src = allMediasPortfolio[indexInProgress].src;
+				photoInProgress = allMediasPortfolio[indexInProgress].return;
+			}
+
+			srcInProgressSlider.src = allMediasPortfolio[indexInProgress - 1].src;
+			photoInProgress = allMediasPortfolio[indexInProgress - 1];
+			indexInProgress = allMediasPortfolio.indexOf(photoInProgress);
+		});
+
+		closePortfolio.addEventListener("click", () => {
+			sliderPortfolio.style.display = "none";
+		});
 	}
 }
