@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/ca0b3d759f.js" crossorigin="anonymous"></script>    <title>Fisheye - photographe </title>
   </head>
 
-  <body>
+  <body class="body">
 
     <header>
       <a href="index.html">
@@ -20,7 +20,7 @@
       </a>
     </header>
 
-    <main id="main" class="media_wrapper">
+    <main id="main" class="media_wrapper" aria-hidden="false">
       <section class="profil"></section>
       <section class="filter"></section>
       <section class="portfolio"></section>
@@ -28,7 +28,7 @@
 
     </main>
 
-    <div class="contact_modal"></div>
+    <div class="contact_modal" aria-hidden="true" role="dialog" aria-describedby="formulaire de contact"></div>
 
     <script src="main.js"></script>
   </body>

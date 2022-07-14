@@ -12,7 +12,6 @@ export default class PhotographerModel {
 		this._cardPhotographer = null;
 		this._cardPortfolio = null;
 		this._cardModal = null;
-		this._cardFilter = null;
 	}
 
 	/* --------------------------------- getters -------------------------------- */
@@ -54,10 +53,6 @@ export default class PhotographerModel {
 	}
 	get cardModal() {
 		return this._cardModal;
-	}
-
-	get cardFilter() {
-		return this._cardFilter;
 	}
 
 	get portfolio() {

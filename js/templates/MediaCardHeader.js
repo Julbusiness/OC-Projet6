@@ -37,27 +37,29 @@ export default class MediaCardHeader {
 		const contactCard = `
     <div class="modal">
     <header>
-      <h2>Contactez-moi ${this._photographer.name}</h2>
+      <h2 class="modal-title">Contactez-moi ${this._photographer.name}</h2>
       <img src="../assets/icons/close.svg" class="btnClose" alt="Close"/>
     </header>
     <form>
       <div>
         <label for="firstname" type="text">Prénom</label>
-        <input type="text" id="firstname" name="firstname"/>
+        <input type="text" id="firstname" name="firstname" class='input-recup'/>
       </div>
       <div>
         <label for="lastname" type="text">Nom</label>
-        <input type="text" id="lastname" name="lastname"/>
+        <input type="text" id="lastname" name="lastname" class='input-recup'/>
       </div>
       <div>
         <label for="email" type="email">Email</label>
-        <input type="email" id="email" name="email"/>
+        <input type="email" id="email" name="email" class='input-recup'/>
       </div>
       <div>
         <label for="text" type="text">Votre message</label>
-        <input type="text" id="text" name="text"/>
+        <input type="text" id="text" name="text" class='input-recup'/>
       </div>
-      <button class="contact_button">Envoyer</button>
+      <a href="#">
+        <input type="button" value="Envoyer" id="send" class="send_button">
+      </a>
     </form>
   </div>
     

@@ -16,7 +16,7 @@ export default class MediaCardSticky {
 		this.$wrapperSticky = document.createElement("div");
 		this.$wrapperSticky.classList.add("sticky-card");
 
-		console.log(this._media);
+		// console.log(this._media);
 
 		const stickyCard = `
     <span class="globalLikes">${this._media.globalLikes}</span>

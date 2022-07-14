@@ -84,20 +84,66 @@ async function init() {
 		$mediaContactWrapper.appendChild(
 			photographer.headerMediaCard.createContactCard()
 		);
+		/* --------------------- création de la modal de contact -------------------- */
 
-		/* -------------------------- création de la modal -------------------------- */
+		const $body = document.querySelector(".body");
+		const $openModalBtn = document.querySelector(".contact_button");
+		const $mainWrapper = document.querySelector(".media_wrapper");
+		const $modalDisplay = document.querySelector(".contact_modal");
+		const $modalCloseBtn = document.querySelector(".btnClose");
+		const $firstname = document.querySelector("#firstname");
 
-		const $modalButton = document.querySelector(".contact_button");
-		const modalDisplay = document.querySelector(".contact_modal");
-		const closeModal = document.querySelector(".btnClose");
+		// Func
+		const onOpenModal = () => {
+			$mainWrapper.setAttribute("aria-hidden", "true");
+			$mainWrapper.style.display = "none";
+			$modalDisplay.setAttribute("aria-hidden", "false");
+			$body.classList.add("no-scroll");
+			$modalDisplay.style.display = "block";
+			$firstname.focus();
+		};
 
-		$modalButton.addEventListener("click", () => {
-			modalDisplay.style.display = "block";
+		const onCloseModal = () => {
+			$mainWrapper.setAttribute("aria-hidden", "false");
+			$mainWrapper.style.display = "block";
+			$modalDisplay.setAttribute("aria-hidden", "true");
+			$body.classList.remove("no-scroll");
+			$modalDisplay.style.display = "none";
+			$openModalBtn.focus();
+		};
+
+		// Event
+		$openModalBtn.addEventListener("click", onOpenModal);
+
+		$modalCloseBtn.addEventListener("click", onCloseModal);
+
+		// Close modal when espace key is pressed
+		document.addEventListener("keydown", (e) => {
+			const keyCode = e.keyCode;
+			// console.log(e)
+			// console.log(keyCode)
+
+			if (
+				$modalDisplay.getAttribute("aria-hidden") == "false" &&
+				keyCode === 27
+			) {
+				onCloseModal();
+			} 
 		});
 
-		closeModal.addEventListener("click", () => {
-			modalDisplay.style.display = "none";
-		});
+		// je recupere les données rentrées en console.log
+		const sendBtn = document.querySelector('#send')
+		const inputs = document.querySelectorAll('.input-recup')
+		// console.log(inputs)
+
+		sendBtn.addEventListener("click", (e) => {
+			e.preventDefault
+
+			inputs.forEach((input => {
+				console.log(input.value)
+			}))
+		})
+
 
 		/* ---------------------- création de la partie sticky ---------------------- */
 		const TemplateSticky = new MediaCardSticky(photographer, media);

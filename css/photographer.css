@@ -142,7 +142,7 @@ header {
 }
 
 
-.contact_button {
+.contact_button, .send_button {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -216,6 +216,10 @@ form input {
     border: none;
     border-radius: 5px;
 }
+
+.no-scroll {
+    overflow: hidden;
+ }
 
 /* ------------------------------- sticky card ------------------------------ */
 .sticky {
