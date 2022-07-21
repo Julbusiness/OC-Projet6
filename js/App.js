@@ -8,6 +8,8 @@ class App {
 		this.$mediasWrapper = document.querySelector(".profil");
 		this.$portfolioWrapper = document.querySelector(".portfolio");
         this.$stickyWrapper = document.querySelector(".sticky");
+        this.$contactWrapper = document.querySelector(".contact_modal")
+        console.log(this.$contactWrapper);
 
 	}
 
@@ -43,7 +45,7 @@ class App {
 			// Insertion des element dans le DOM
 
 			this.$mediasWrapper.appendChild(
-				photograph.headerMediaCard.createMediaCardHeader()
+				photograph.headerMediaCard.createMediaCardHeader(photograph)
 			);
 
 			/* ----- affiche les différents medias du photographe sur sa page perso (content) ----- */
@@ -64,9 +66,82 @@ class App {
     
             const TemplateSticky = new MediaCardSticky(photograph, media);
             this.$stickyWrapper.appendChild(TemplateSticky.createCardSticky());
+
+            /* --------------------------------- contact -------------------------------- */
+            
+            const TemplateContact = new Contact(photograph)
+            this.$contactWrapper.appendChild(TemplateContact.createContactCard(photograph)
+            );
+
+            const $body = document.querySelector(".body");
+            const $openModalBtn = document.querySelector(".contact_button");
+            const $mainWrapper = document.querySelector(".photograph-content");
+            const $modalDisplay = document.querySelector(".contact_modal");
+            const $modalCloseBtn = document.querySelector(".btnClose");
+            const $firstname = document.querySelector("#firstname");
+
+            // Func
+            const onOpenModal = () => {
+                $mainWrapper.setAttribute("aria-hidden", "true");
+                $mainWrapper.style.display = "none";
+                $modalDisplay.setAttribute("aria-hidden", "false");
+                $modalDisplay.style.display = "block";
+                $body.classList.add("no-scroll");
+                $firstname.focus();
+            };
+
+            const onCloseModal = () => {
+                $mainWrapper.setAttribute("aria-hidden", "false");
+                $mainWrapper.style.display = "block";
+                $modalDisplay.setAttribute("aria-hidden", "true");
+                $body.classList.remove("no-scroll");
+                $modalDisplay.style.display = "none";
+                $openModalBtn.focus();
+            };
+
+            // Event
+            $openModalBtn.addEventListener("click", onOpenModal);
+
+            $modalCloseBtn.addEventListener("click", onCloseModal);
+
+            // Close modal when espace key is pressed
+            document.addEventListener("keydown", (e) => {
+                const keyCode = e.keyCode;
+                // console.log(e)
+                // console.log(keyCode)
+
+                if (
+                    $modalDisplay.getAttribute("aria-hidden") == "false" &&
+                    keyCode === 27
+                ) {
+                    onCloseModal();
+                }
+            });
+
+            // je recupere les données rentrées en console.log
+            const sendBtn = document.querySelector("#send");
+            const inputs = document.querySelectorAll(".input-recup");
+            // console.log(inputs)
+
+            sendBtn.addEventListener("click", (e) => {
+                e.preventDefault;
+
+                inputs.forEach((input) => {
+                    console.log(input.value);
+                });
+            });
+
+
+
+
+
+
+
+
+
+
+
 		}
-
-
 	}
 }
 

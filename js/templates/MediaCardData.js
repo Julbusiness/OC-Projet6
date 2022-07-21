@@ -13,20 +13,20 @@ class MediaCardData {
 		return this._photographer
 	}
 
-	createMediaCardHeader() {
+	createMediaCardHeader(photograph) {
 
 		const MediaCard = `
 
     <div class="info-section">
-      <h1>${this._photographer.name}</h1>
-      <p class="local-header">${this._photographer.city}, ${this._photographer.country}</p>
-      <p class="tagline-header">${this._photographer.tagline}</p>
+      <h1>${photograph.name}</h1>
+      <p class="local-header">${photograph.city}, ${photograph.country}</p>
+      <p class="tagline-header">${photograph.tagline}</p>
     </div>
     <div class="button-section">
       <button class="contact_button" aria-label="contact me">Contactez-moi</button>
     </div>
     <div class="image-header-section">
-      <img class="img-header" src="${this._photographer.portrait}" alt="${this._photographer.name}">
+      <img class="img-header" src="${photograph.portrait}" alt="${photograph.name}">
     </div>
 		
 		`

@@ -7,10 +7,6 @@ class MediaCardContent {
     this.$wrapperContent.classList.add(`media-card--${this._media.type}`);
 	}
   
-	get mediaHtmlElement() {
-    return this.$wrapperCard;
-	}
-  
 	/* -------------------------------- fonctions ------------------------------- */
   
 	createMediaCardContent(media) {
