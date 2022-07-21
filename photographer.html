@@ -5,33 +5,42 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ca0b3d759f.js" crossorigin="anonymous"></script>
     <title>Fisheye - photographe </title>
   </head>
   <body>
+
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="index.html">
+        <img src="../assets/images/logo.png" class="logo" alt="Fisheye Home page" />
+      </a>
     </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
+  
+    <main id="main" class="photograph-content" aria-hidden="false">
+      <section class="profil"></section>
+      <section class="filter"></section>
+      <section class="portfolio"></section>
+      <section class="sticky"></section>
+  
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+  
+    <div class="contact_modal" aria-hidden="true" role="dialog" aria-describedby="formulaire de contact"></div>
+  
+    <div class="portfolio_modal" aria-hidden="true" role="dialog" aria-describedby="slider images">
+
+    </div>
+
+    <!-- ------------------------------- scripts ------------------------------- -->
+
+    <script src="js/api/Api.js"></script>
+    <script src="js/factories/MediasFactory.js"></script>
+    <script src="js/models/Photographer.js"></script>
+    <script src="js/models/Media.js"></script>
+    <script src="js/templates/PhotographerCard.js"></script>
+    <script src="js/templates/MediaCardData.js"></script>
+    <script src="js/templates/MediaCardContent.js"></script>
+    <script src="js/templates/MediaCardSticky.js"></script>
+    <script src="js/App.js"></script>
+
   </body>
 </html>

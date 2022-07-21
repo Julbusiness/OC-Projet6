@@ -22,6 +22,8 @@ class Api {
 			const photographer = responseJSON.photographers.find(
 				(photographer) => photographer.id === userId
 			);
+			// console.log(responseJSON.photographers.find((photographer) => photographer.id))
+
 			return photographer;
 		} catch (err) {
 			console.log("La requete api getPhotographerById a échoué : ", err);

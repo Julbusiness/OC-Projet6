@@ -1,21 +1,74 @@
 class App {
-    constructor() {
-        this.$photographersWrapper = document.querySelector('.photographers-wrapper')
-        this.photographersApi = new Api('/data/photographers.json')
-    }
+	constructor() {
+		this.dataApi = new Api("/data/photographers.json");
 
-    async main() {
-        const photographersData = await this.photographersApi.getPhotographers()
+		this.$photographersWrapper = document.querySelector(
+			".photographers-wrapper"
+		);
+		this.$mediasWrapper = document.querySelector(".profil");
+		this.$portfolioWrapper = document.querySelector(".portfolio");
+        this.$stickyWrapper = document.querySelector(".sticky");
 
-        photographersData
-        .map(photographer => new Photographer(photographer))
-        .forEach(photographer => {
-            const Template = new PhotographerCard(photographer)
-            this.$photographersWrapper.appendChild(Template.createPhotographerCard())
-        })
-    }
+	}
+
+	async main() {
+		if (this.$photographersWrapper) {
+			/* ------------- Affiche les photographes sur la page d'accueil ------------- */
+
+			const photographersData = await this.dataApi.getPhotographers();
+
+			photographersData
+				.map((photographer) => new Photographer(photographer))
+				.forEach((photographer) => {
+					const Template = new PhotographerCard(photographer);
+					this.$photographersWrapper.appendChild(
+						Template.createPhotographerCard()
+					);
+				});
+		} else {
+			/* ------- Affiche les infos du photographe sur sa page perso (header) ------ */
+
+			const url = window.location.search;
+			const searchParams = new URLSearchParams(url);
+			const userId = parseInt(searchParams.get("id"));
+
+			// création de l'objet photographData
+
+			const photographData = await this.dataApi.getPhotographerById(userId);
+			// console.log(photographData)
+			const photograph = new Photographer(photographData);
+
+			photograph.headerMediaCard = new MediaCardData(photograph);
+
+			// Insertion des element dans le DOM
+
+			this.$mediasWrapper.appendChild(
+				photograph.headerMediaCard.createMediaCardHeader()
+			);
+
+			/* ----- affiche les différents medias du photographe sur sa page perso (content) ----- */
+
+			const portfolioData = await this.dataApi.getPortfolioByUserId(userId);
+			const AllMedias = portfolioData.map((media) => new MediasFactory(media));
+            const media = new Media(AllMedias);
+
+			AllMedias.forEach((media) => {
+				const Template = new MediaCardContent(media);
+				this.$portfolioWrapper.appendChild(
+					Template.createMediaCardContent(media)
+				);
+				// console.log(media)
+			});
+
+            /* ---------------------- création de la partie sticky ---------------------- */
+    
+            const TemplateSticky = new MediaCardSticky(photograph, media);
+            this.$stickyWrapper.appendChild(TemplateSticky.createCardSticky());
+		}
+
+
+	}
 }
 
-const app = new App()
-app.main()
-    
+const app = new App();
+app.main();

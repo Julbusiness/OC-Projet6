@@ -1,12 +1,12 @@
 class Photographer {
-	constructor(data) {
-		this._name = data.name;
-		this._id = data.id;
-		this._city = data.city;
-		this._country = data.country;
-		this._tagline = data.tagline;
-		this._price = data.price;
-		this._portrait = data.portrait;
+	constructor(photographer) {
+		this._name = photographer.name;
+		this._id = photographer.id;
+		this._city = photographer.city;
+		this._country = photographer.country;
+		this._tagline = photographer.tagline;
+		this._price = photographer.price;
+		this._portrait = photographer.portrait;
 	}
 
 	/* --------------------------------- getters -------------------------------- */
