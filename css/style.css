@@ -1,3 +1,5 @@
+@import url("photographer.css");
+
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0;
@@ -25,14 +27,14 @@ h1 {
     margin-left: 100px;
 }
 
-.photographer_wrapper {
+.photographers-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin-top: 100px;
 }
 
-.photographer_wrapper article {
+.photographers-wrapper article {
     justify-self: center;
     display: flex;
     justify-content: center;
@@ -48,7 +50,7 @@ h1 {
     border: none;
 }
 
-.photographer_wrapper article img {
+.photographers-wrapper article img {
     height: 200px;
     width: 200px;
     border-radius: 50%;
@@ -60,7 +62,7 @@ h1 {
     margin: 0 auto;
 }
 
-.photographer_wrapper article h2 {
+.photographers-wrapper article h2 {
     color: #D3573C;
     font-size: 36px;
     font-weight: 400;
