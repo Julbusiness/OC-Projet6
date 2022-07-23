@@ -1,47 +1,65 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/ca0b3d759f.js" crossorigin="anonymous"></script>
-    <title>Fisheye - photographe </title>
-  </head>
-  <body class="body">
 
-    <header>
-      <a href="index.html">
-        <img src="../assets/images/logo.png" class="logo" alt="Fisheye Home page" />
-      </a>
-    </header>
-  
-    <main id="main" class="photograph-content" aria-hidden="false">
-      <section class="profil"></section>
-      <section class="filter"></section>
-      <section class="portfolio"></section>
-      <section class="sticky"></section>
-  
-    </main>
-  
-    <div class="contact_modal" aria-hidden="true" role="dialog" aria-describedby="formulaire de contact"></div>
-  
-    <div class="portfolio_modal" aria-hidden="true" role="dialog" aria-describedby="slider images">
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/ca0b3d759f.js" crossorigin="anonymous"></script>
+  <title>Fisheye - photographe </title>
+</head>
+
+<body class="body">
+
+  <header>
+    <a href="index.html">
+      <img src="../assets/images/logo.png" class="logo" alt="Fisheye Home page" />
+    </a>
+  </header>
+
+  <main id="main" class="photograph-content" aria-hidden="false">
+    <section class="profil"></section>
+    <section class="filter"></section>
+    <section class="portfolio"></section>
+    <section class="sticky"></section>
+
+  </main>
+
+  <div class="contact_modal" aria-hidden="true" role="dialog" aria-describedby="formulaire de contact"></div>
+
+  <div class="lightbox" aria-hidden="true" role="dialog" aria-describedby="slider images">
+
+    <div class="content">
+      <div class="close">
+        <img src="./assets/icons/closeLigthbox.svg" alt="">
+      </div>
+      <div class="previous">
+        <img src="./assets/icons/chevron-letf.svg" alt="">
+      </div>
+      <div class="next">
+        <img src="./assets/icons/chevron-right.svg" alt="">
+      </div>
 
     </div>
 
-    <!-- ------------------------------- scripts ------------------------------- -->
+  </div>
 
-    <script src="js/api/Api.js"></script>
-    <script src="js/factories/MediasFactory.js"></script>
-    <script src="js/models/Photographer.js"></script>
-    <script src="js/models/Media.js"></script>
-    <script src="js/templates/PhotographerCard.js"></script>
-    <script src="js/templates/MediaCardData.js"></script>
-    <script src="js/templates/MediaCardContent.js"></script>
-    <script src="js/templates/MediaCardSticky.js"></script>
-    <script src="js/templates/Contact.js"></script>
-    <script src="js/App.js"></script>
+  <!-- ------------------------------- scripts ------------------------------- -->
 
-  </body>
+  <script src="js/api/Api.js"></script>
+  <script src="js/factories/MediasFactory.js"></script>
+  <script src="js/models/Photographer.js"></script>
+  <script src="js/models/Media.js"></script>
+  <script src="js/templates/PhotographerCard.js"></script>
+  <script src="js/templates/MediaCardData.js"></script>
+  <script src="js/templates/MediaCardContent.js"></script>
+  <script src="js/templates/MediaCardSticky.js"></script>
+  <script src="js/templates/Contact.js"></script>
+  <script src="js/templates/Lightbox.js"></script>
+  <script src="js/App.js"></script>
+
+</body>
+
 </html>

@@ -4,8 +4,6 @@ class MediaCardData {
 
 		this._wrapperHeader = document.createElement('div')
 		this._wrapperHeader.classList.add('media-card-wrapper')
-		// this._wrapperContact = document.createElement('div')
-		// this._wrapperContact.classList.add('contact-card-wrapper')
 
 	}
 

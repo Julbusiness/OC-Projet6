@@ -215,7 +215,7 @@ form input {
 }
 
 .no-scroll {
-    overflow: hidden;
+    /* overflow: hidden; */
  }
 
 /* ------------------------------- sticky card ------------------------------ */
@@ -255,4 +255,87 @@ form input {
     margin-left: 50px;
 }
 
-/* ---------------------------- portfolio slider ---------------------------- */
+/* ---------------------------- Lightbox ---------------------------- */
+
+.lightbox {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.lightbox.show {
+    display: block;
+}
+
+.btnCloseLigthbox {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.content {
+	height: 800px;
+	width: 1000px;
+	overflow: hidden;
+	position: relative;
+}
+
+.images img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.btm-sliders {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	display: flex;
+	transform: translateX(-50%);
+}
+
+.content .slide {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 55px;
+	height: 55px;
+	cursor: pointer;
+	border-radius: 50%;
+}
+
+.title {
+    font-size: 30px;
+    color: red;
+}
+
+.content .slide:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.slide span {
+	font-size: 55px;
+	color: white;
+}
+
+.content .right {
+	right: 10px;
+}
+
+.content .left {
+	left: 10px;
+}

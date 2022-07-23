@@ -1,16 +1,15 @@
 class App {
-	constructor() {
-		this.dataApi = new Api("/data/photographers.json");
-
-		this.$photographersWrapper = document.querySelector(
-			".photographers-wrapper"
-		);
-		this.$mediasWrapper = document.querySelector(".profil");
-		this.$portfolioWrapper = document.querySelector(".portfolio");
-        this.$stickyWrapper = document.querySelector(".sticky");
-        this.$contactWrapper = document.querySelector(".contact_modal")
-        console.log(this.$contactWrapper);
-
+    constructor() {
+        this.dataApi = new Api("/data/photographers.json");
+        this.$body = document.querySelector(".body");
+				this.$photographersWrapper = document.querySelector(
+            ".photographers-wrapper"
+            );
+        this.$mediasWrapper = document.querySelector(".profil");
+				this.$portfolioWrapper = document.querySelector(".portfolio");
+				this.$stickyWrapper = document.querySelector(".sticky");
+				this.$contactWrapper = document.querySelector(".contact_modal");
+        this.$ligthboxWrapper = document.querySelector('.content')
 	}
 
 	async main() {
@@ -52,7 +51,7 @@ class App {
 
 			const portfolioData = await this.dataApi.getPortfolioByUserId(userId);
 			const AllMedias = portfolioData.map((media) => new MediasFactory(media));
-            const media = new Media(AllMedias);
+			const media = new Media(AllMedias);
 
 			AllMedias.forEach((media) => {
 				const Template = new MediaCardContent(media);
@@ -62,85 +61,85 @@ class App {
 				// console.log(media)
 			});
 
-            /* ---------------------- création de la partie sticky ---------------------- */
-    
-            const TemplateSticky = new MediaCardSticky(photograph, media);
-            this.$stickyWrapper.appendChild(TemplateSticky.createCardSticky());
+			/* ---------------------- création de la partie sticky ---------------------- */
 
-            /* --------------------------------- contact -------------------------------- */
-            
-            const TemplateContact = new Contact(photograph)
-            this.$contactWrapper.appendChild(TemplateContact.createContactCard(photograph)
-            );
+			const TemplateSticky = new MediaCardSticky(photograph, media);
+			this.$stickyWrapper.appendChild(TemplateSticky.createCardSticky());
 
-            const $body = document.querySelector(".body");
-            const $openModalBtn = document.querySelector(".contact_button");
-            const $mainWrapper = document.querySelector(".photograph-content");
-            const $modalDisplay = document.querySelector(".contact_modal");
-            const $modalCloseBtn = document.querySelector(".btnClose");
-            const $firstname = document.querySelector("#firstname");
+			/* --------------------------------- contact -------------------------------- */
 
-            // Func
-            const onOpenModal = () => {
-                $mainWrapper.setAttribute("aria-hidden", "true");
-                $mainWrapper.style.display = "none";
-                $modalDisplay.setAttribute("aria-hidden", "false");
-                $modalDisplay.style.display = "block";
-                $body.classList.add("no-scroll");
-                $firstname.focus();
-            };
+			const TemplateContact = new Contact(photograph);
+			this.$contactWrapper.appendChild(
+				TemplateContact.createContactCard(photograph)
+			);
 
-            const onCloseModal = () => {
-                $mainWrapper.setAttribute("aria-hidden", "false");
-                $mainWrapper.style.display = "block";
-                $modalDisplay.setAttribute("aria-hidden", "true");
-                $body.classList.remove("no-scroll");
-                $modalDisplay.style.display = "none";
-                $openModalBtn.focus();
-            };
+			const $openModalBtn = document.querySelector(".contact_button");
+			const $mainWrapper = document.querySelector(".photograph-content");
+			const $modalDisplay = document.querySelector(".contact_modal");
+			const $modalCloseBtn = document.querySelector(".btnClose");
+			const $firstname = document.querySelector("#firstname");
 
-            // Event
-            $openModalBtn.addEventListener("click", onOpenModal);
+			// Func
+			const onOpenModal = () => {
+				$mainWrapper.setAttribute("aria-hidden", "true");
+				$mainWrapper.style.display = "none";
+				$modalDisplay.setAttribute("aria-hidden", "false");
+				$modalDisplay.style.display = "block";
+				this.$body.classList.add("no-scroll");
+				$firstname.focus();
+			};
 
-            $modalCloseBtn.addEventListener("click", onCloseModal);
+			const onCloseModal = () => {
+				$mainWrapper.setAttribute("aria-hidden", "false");
+				$mainWrapper.style.display = "block";
+				$modalDisplay.setAttribute("aria-hidden", "true");
+				this.$body.classList.remove("no-scroll");
+				$modalDisplay.style.display = "none";
+				$openModalBtn.focus();
+			};
 
-            // Close modal when espace key is pressed
-            document.addEventListener("keydown", (e) => {
-                const keyCode = e.keyCode;
-                // console.log(e)
-                // console.log(keyCode)
+			// Event
+			$openModalBtn.addEventListener("click", onOpenModal);
 
-                if (
-                    $modalDisplay.getAttribute("aria-hidden") == "false" &&
-                    keyCode === 27
-                ) {
-                    onCloseModal();
-                }
-            });
+			$modalCloseBtn.addEventListener("click", onCloseModal);
 
-            // je recupere les données rentrées en console.log
-            const sendBtn = document.querySelector("#send");
-            const inputs = document.querySelectorAll(".input-recup");
-            // console.log(inputs)
+			// Close modal when espace key is pressed
+			document.addEventListener("keydown", (e) => {
+				const keyCode = e.keyCode;
+				// console.log(e)
+				// console.log(keyCode)
 
-            sendBtn.addEventListener("click", (e) => {
-                e.preventDefault;
+				if (
+					$modalDisplay.getAttribute("aria-hidden") == "false" &&
+					keyCode === 27
+				) {
+					onCloseModal();
+				}
+			});
 
-                inputs.forEach((input) => {
-                    console.log(input.value);
-                });
-            });
+			// je recupere les données rentrées en console.log
+			const sendBtn = document.querySelector("#send");
+			const inputs = document.querySelectorAll(".input-recup");
+			// console.log(inputs)
 
+			sendBtn.addEventListener("click", (e) => {
+				e.preventDefault;
 
+				inputs.forEach((input) => {
+					console.log(input.value);
+				});
+			});
 
-
-
-
-
-
-
-
-
+			/* -------------------------------- lightbox -------------------------------- */
+			
+			let lightbox = new Lightbox(AllMedias, media);
+			console.log(media);
+	
+			document.querySelectorAll('.portfolio .media-card').forEach(mediasDom => {
+				mediasDom.addEventListener('click', (e) => {
+					lightbox.show(e.currentTarget.dataset.id)
+				})
+			})
 		}
 	}
 }
