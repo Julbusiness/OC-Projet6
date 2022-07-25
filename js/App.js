@@ -117,7 +117,6 @@ class App {
 			// je recupere les données rentrées en console.log
 			const sendBtn = document.querySelector("#send");
 			const inputs = document.querySelectorAll(".input-recup");
-			// console.log(inputs)
 
 			sendBtn.addEventListener("click", (e) => {
 				e.preventDefault;
