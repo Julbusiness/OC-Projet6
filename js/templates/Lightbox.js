@@ -1,31 +1,63 @@
 class Lightbox {
-	constructor(listElement, media) {
+	constructor(listElement) {
 		this.currentElement = null;
 		this.listElement = listElement;
-		this._media = media;
-		console.log(this.listElement)
-	}
-
-	get media() { 
-		return this._media
 	}
 
 	show(id) {
 		this.currentElement = this.getElementById(id);
-		document.querySelector(
-			".content"
-		).innerHTML = `<${this.currentElement.format} src="${this.currentElement.path}" alt="${this.currentElement.description}, ${this.currentElement.type}" class="picture"/>`;
-		document.querySelector(".lightbox").classList.add("show");
+		this.display();
 	}
 
-	next() {}
+	next() {
+		let index = this.listElement.findIndex(element => element.id == this.currentElement.id)
+		if (index == this.listElement.length - 1) {
+			this.currentElement = this.listElement[0]
+		} else {
+			this.currentElement = this.listElement[index + 1]
+		}
+		this.display()
+	}
 
-	previous() {}
+	previous() {
+		let index = this.listElement.findIndex(element => element.id == this.currentElement.id)
+		if (index == 0) {
+			this.currentElement = this.listElement[this.listElement.length - 1]
+		} else {
+			this.currentElement = this.listElement[index - 1]
+		}
+		this.display()
+	}
 
-	manageEvent() {}
+	close() {
+		document.querySelector(".lightbox").classList.remove("show");
+	}
 
 	getElementById(id) {
-		// console.log(this.listElement.find(element => element.id == id))
 		return this.listElement.find((element) => element.id == id);
+	}
+
+	display() {
+		document.querySelector(".content").innerHTML = `
+			<button class="close">
+				<img src="./assets/icons/closeLigthbox.svg" alt="">
+			</button>
+			<button class="previous">
+				<img src="./assets/icons/chevron-letf.svg" alt="">
+			</button>
+			<button class="next">
+				<img src="./assets/icons/chevron-right.svg" alt="">
+			</button>
+			<${this.currentElement.format} src="${this.currentElement.path}" alt="${this.currentElement.description}, ${this.currentElement.type}" class="picture" controls autoplay="true"/>`
+		document.querySelector(".lightbox").classList.add("show");
+		document.querySelector(".lightbox .next").addEventListener("click", () => {
+			this.next()
+		})
+		document.querySelector(".lightbox .previous").addEventListener("click", () => {
+			this.previous()
+		})
+		document.querySelector(".lightbox .close").addEventListener("click", () => {
+			this.close()
+		})
 	}
 }

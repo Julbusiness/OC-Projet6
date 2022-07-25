@@ -1,15 +1,15 @@
 class App {
-    constructor() {
-        this.dataApi = new Api("/data/photographers.json");
-        this.$body = document.querySelector(".body");
-				this.$photographersWrapper = document.querySelector(
-            ".photographers-wrapper"
-            );
-        this.$mediasWrapper = document.querySelector(".profil");
-				this.$portfolioWrapper = document.querySelector(".portfolio");
-				this.$stickyWrapper = document.querySelector(".sticky");
-				this.$contactWrapper = document.querySelector(".contact_modal");
-        this.$ligthboxWrapper = document.querySelector('.content')
+	constructor() {
+		this.dataApi = new Api("/data/photographers.json");
+		this.$body = document.querySelector(".body");
+		this.$photographersWrapper = document.querySelector(
+			".photographers-wrapper"
+		);
+		this.$mediasWrapper = document.querySelector(".profil");
+		this.$portfolioWrapper = document.querySelector(".portfolio");
+		this.$stickyWrapper = document.querySelector(".sticky");
+		this.$contactWrapper = document.querySelector(".contact_modal");
+		this.$ligthboxWrapper = document.querySelector(".content");
 	}
 
 	async main() {
@@ -36,9 +36,7 @@ class App {
 			// création de l'objet photographData
 
 			const photographData = await this.dataApi.getPhotographerById(userId);
-			// console.log(photographData)
 			const photograph = new Photographer(photographData);
-
 			photograph.headerMediaCard = new MediaCardData(photograph);
 
 			// Insertion des element dans le DOM
@@ -58,7 +56,6 @@ class App {
 				this.$portfolioWrapper.appendChild(
 					Template.createMediaCardContent(media)
 				);
-				// console.log(media)
 			});
 
 			/* ---------------------- création de la partie sticky ---------------------- */
@@ -131,15 +128,18 @@ class App {
 			});
 
 			/* -------------------------------- lightbox -------------------------------- */
-			
-			let lightbox = new Lightbox(AllMedias, media);
-			console.log(media);
-	
-			document.querySelectorAll('.portfolio .media-card').forEach(mediasDom => {
-				mediasDom.addEventListener('click', (e) => {
-					lightbox.show(e.currentTarget.dataset.id)
-				})
-			})
+
+			let lightbox = new Lightbox(AllMedias);
+
+			document
+				.querySelectorAll(".portfolio .media-card")
+				.forEach((mediasDom) => {
+					mediasDom.addEventListener("click", (e) => {
+						lightbox.show(e.currentTarget.dataset.id);
+					});
+				});
+
+			/* -------------------------------------------------------------------------- */
 		}
 	}
 }
