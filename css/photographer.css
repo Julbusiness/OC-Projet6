@@ -126,11 +126,13 @@ header {
 /* ---------------------------------- Modal --------------------------------- */
 
 .contact_modal {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	background: white;
+	top: 0;
+	left: 0;
 	display: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 }
 
 .contact_button,
@@ -152,14 +154,22 @@ header {
 }
 
 .modal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+}
+
+.modal-content {
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
 	border-radius: 5px;
 	background-color: #db8876;
 	width: 600px;
 	height: 900px;
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
 	padding: 35px;
 	margin: auto;
 }
@@ -273,7 +283,7 @@ form input {
 }
 
 .picture {
-    height: 900px;
+  height: 900px;
 	width: 1050px;
 	object-fit: cover;
 	margin: auto;
@@ -282,7 +292,6 @@ form input {
 .content {
 	height: 985px;
 	width: 1250px;
-	overflow: hidden;
 	position: relative;
 	margin: 0 auto;
 	display: flex;

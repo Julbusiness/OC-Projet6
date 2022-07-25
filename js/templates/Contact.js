@@ -7,42 +7,91 @@ class Contact {
 		return this._photograph;
 	}
 
-	createContactCard(photograph) {
+	show() {
+		this.display();
+	}
 
-    this.$wrapperContact = document.createElement('div')
-    this.$wrapperContact.classList.add('modal')
+	onOpenModal() {
+		document
+			.querySelector(".photograph-content")
+			.setAttribute("aria-hidden", "true");
+		document.querySelector(".photograph-content").style.display = "none";
+		document
+			.querySelector(".contact_modal")
+			.setAttribute("aria-hidden", "false");
+		document.querySelector(".contact_modal").style.display = "block";
+    document.querySelector(".body").classList.add("no-scroll");
+		document.querySelector("#firstname").focus();
+	}
 
-		const contactCard = `
+	onCloseModal() {
+		document
+			.querySelector(".photograph-content")
+			.setAttribute("aria-hidden", "false");
+		document.querySelector(".photograph-content").style.display = "block";
+		document
+			.querySelector(".contact_modal")
+			.setAttribute("aria-hidden", "true");
+      document.querySelector(".body").classList.remove("no-scroll");
+		document.querySelector(".contact_modal").style.display = "none";
+		document.querySelector(".contact_button").focus();
+	}
 
-    <header>
-      <h2 class="modal-title">Contactez-moi ${photograph.name}</h2>
-      <img src="../assets/icons/closeContact.svg" class="btnClose" alt="Close contact form"/>
-    </header>
-    <form>
-      <div>
-        <label for="firstname" type="text">Prénom</label>
-        <input type="text" id="firstname" name="firstname" class='input-recup'/>
-      </div>
-      <div>
-        <label for="lastname" type="text">Nom</label>
-        <input type="text" id="lastname" name="lastname" class='input-recup'/>
-      </div>
-      <div>
-        <label for="email" type="email">Email</label>
-        <input type="email" id="email" name="email" class='input-recup'/>
-      </div>
-      <div>
-        <label for="text" type="text">Votre message</label>
-        <input type="text" id="text" name="Your message" class='input-recup'/>
-      </div>
-      <a href="#">
-        <input type="button" value="Envoyer" id="send" class="send_button">
-      </a>
-    </form>
+	display() {
+		document.querySelector(".contact_modal").innerHTML = `
+    <div class="modal">
+			<div class="modal-content">
+				<header>
+					<h2 class="modal-title">Contactez-moi ${this.photograph.name}</h2>
+					<img src="../assets/icons/closeContact.svg" class="btnClose" alt="Close contact form"/>
+				</header>
+				<form>
+					<div>
+						<label for="firstname" type="text">Prénom</label>
+						<input type="text" id="firstname" name="firstname" class='input-recup'/>
+					</div>
+					<div>
+						<label for="lastname" type="text">Nom</label>
+						<input type="text" id="lastname" name="lastname" class='input-recup'/>
+					</div>
+					<div>
+						<label for="email" type="email">Email</label>
+						<input type="email" id="email" name="email" class='input-recup'/>
+					</div>
+					<div>
+						<label for="text" type="text">Votre message</label>
+						<input type="text" id="text" name="Your message" class='input-recup'/>
+					</div>
+					<a href="#">
+						<input type="button" value="Envoyer" id="send" class="send_button">
+					</a>
+				</form>
+			</div>
+		</div>
 
-    
     `;
-		this.$wrapperContact.innerHTML = contactCard;
-		return this.$wrapperContact;
+
+		document.querySelector(".contact_button").addEventListener("click", () => {
+			this.onOpenModal();
+		});
+
+		document.querySelector(".btnClose").addEventListener("click", () => {
+			this.onCloseModal();
+		});
+
+    document.addEventListener("keydown", (e) => {
+			switch (e.key) {
+				case "Escape":
+					this.onCloseModal();
+					break;
+			}
+		});
+
+    document.querySelector("#send").addEventListener("click", (e) => {
+      document.querySelectorAll(".input-recup").forEach((input) => {
+        console.log(input.value);
+        this.onCloseModal()
+      });
+    });
 	}
 }
