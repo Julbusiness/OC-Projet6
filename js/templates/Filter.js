@@ -7,11 +7,11 @@ class Filter {
     this.$mediasWrapper = document.querySelector('.portfolio')
   }
 
-  async filterMedias(popularity) {
+  async filterMedias(likes) {
     this.clearMediasWrapper()
 
-    const AdaptedFilterLib = new Adapter(this.Medias, popularity)
-
+    const AdaptedFilterLib = new Adapter(this.medias, likes)
+    console.log(AdaptedFilterLib)
     const FilteredMedias = await AdaptedFilterLib.filterByPopularity()
 
     FilteredMedias.forEach(media => {
@@ -24,8 +24,9 @@ onChangeFilter() {
     this.$wrapper
         .querySelector('form')
         .addEventListener('change', e => {
-            const popularity = e.target.value
-            this.filterMedias(popularity)
+            const likes = e.target.value
+            console.log(e.target.value);
+            this.filterMedias(likes)
         })
 }
 
@@ -33,13 +34,14 @@ clearMediasWrapper() {
     this.$mediasWrapper.innerHTML = ""
 }
 
-render() {
+render(media) {
+    console.log(media);
     const filterForm = `
         <form class="filter-form" action="#" method="POST">
             <label for="filter-select">Trier par : </label>
             <select name="filter-select" id="filter-select">
                 <option value="">Aucun filtre</option>
-                <option value="popularity">Popularity</option>
+                <option value="${media.likes}">Popularity</option>
                 <option value="date">Date</option>
                 <option value="title">Title</option>
             </select>

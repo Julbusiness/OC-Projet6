@@ -87,7 +87,7 @@ class App {
 
 			/* ------------------------ création de la partie tri ----------------------- */
 			const filter = new Filter(AllMedias)
-			filter.render()
+			filter.render(media)
 
 
 

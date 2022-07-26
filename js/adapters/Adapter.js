@@ -1,23 +1,22 @@
 class Adapter{
-  constructor(medias, popularity, date, title) {
+  constructor(medias) {
     this.medias = medias
-    this.popularity = popularity
-    this.date = date
-    this.title = title
+    console.log(medias)
+
 }
 
 async filterByPopularity() {
-    return await FilterV2.filterByPopularity(this.popularity
+    return await FilterV2.filterByPopularity(this.medias.likes
       , this.medias)
 }
 
 async filterByDate() {
-    return await FilterV2.filterByDate(this.date
+    return await FilterV2.filterByDate(this.medias.date
       , this.medias)
 }
 
 async filterByTitle() {
-    return await FilterV2.filterByTitle(this.title
+    return await FilterV2.filterByTitle(this.medias.title
       , this.medias)
 }
 }
