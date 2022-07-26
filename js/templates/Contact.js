@@ -20,7 +20,7 @@ class Contact {
 			.querySelector(".contact_modal")
 			.setAttribute("aria-hidden", "false");
 		document.querySelector(".contact_modal").style.display = "block";
-    document.querySelector(".body").classList.add("no-scroll");
+		document.querySelector(".body").classList.add("no-scroll");
 		document.querySelector("#firstname").focus();
 	}
 
@@ -32,9 +32,16 @@ class Contact {
 		document
 			.querySelector(".contact_modal")
 			.setAttribute("aria-hidden", "true");
-      document.querySelector(".body").classList.remove("no-scroll");
+		document.querySelector(".body").classList.remove("no-scroll");
 		document.querySelector(".contact_modal").style.display = "none";
 		document.querySelector(".contact_button").focus();
+	}
+
+	enter() {
+		document.querySelectorAll(".input-recup").forEach((input) => {
+			console.log(input.value);
+			this.onCloseModal();
+		});
 	}
 
 	display() {
@@ -79,19 +86,19 @@ class Contact {
 			this.onCloseModal();
 		});
 
-    document.addEventListener("keydown", (e) => {
+		document.addEventListener("keydown", (e) => {
 			switch (e.key) {
 				case "Escape":
 					this.onCloseModal();
 					break;
+				case "Enter":
+					this.enter();
+					break;
 			}
 		});
 
-    document.querySelector("#send").addEventListener("click", (e) => {
-      document.querySelectorAll(".input-recup").forEach((input) => {
-        console.log(input.value);
-        this.onCloseModal()
-      });
-    });
+		document.querySelector("#send").addEventListener("click", () => {
+			this.enter();
+		});
 	}
 }
