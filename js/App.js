@@ -86,11 +86,14 @@ class App {
 
 
 			/* ------------------------ création de la partie tri ----------------------- */
+
 			const filter = new Filter(AllMedias)
-			filter.render(media)
-
-
-
+			filter.render()
+			
+			AllMedias.forEach(media => {
+				const Template = new MediaCardContent(media)
+				this.$mediasWrapper.appendChild(Template.createMediaCardContent())
+			})
 		}
 	}
 }

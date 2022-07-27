@@ -1,22 +1,18 @@
-class Adapter{
-  constructor(medias) {
-    this.medias = medias
-    console.log(medias)
+// class Adapter {
+// 	constructor(Medias, likes) {
+// 		this.Medias = Medias;
+// 		this.likes = likes;
+// 	}
 
-}
+// 	async filterByPopularity() {
+// 		return await FilterV1.filterByPopularity(this.Medias.likes, this.Medias);
+// 	}
 
-async filterByPopularity() {
-    return await FilterV2.filterByPopularity(this.medias.likes
-      , this.medias)
-}
+// 	async filterByDate() {
+// 		return await FilterV1.filterByDate(this.Medias.date, this.Medias);
+// 	}
 
-async filterByDate() {
-    return await FilterV2.filterByDate(this.medias.date
-      , this.medias)
-}
-
-async filterByTitle() {
-    return await FilterV2.filterByTitle(this.medias.title
-      , this.medias)
-}
-}
+// 	async filterByTitle() {
+// 		return await FilterV1.filterByTitle(this.Medias.title, this.Medias);
+// 	}
+// }

@@ -1,52 +1,62 @@
 class Filter {
-  constructor(medias){
-    this.medias = medias;
+  constructor(Medias){
+    this.Medias = Medias;
 
     this.$wrapper = document.createElement('div')
     this.$filterFormWrapper = document.querySelector('.filter-form-wrapper')
     this.$mediasWrapper = document.querySelector('.portfolio')
   }
 
-  async filterMedias(likes) {
+  async filterMedias(likes, date, title) {
     this.clearMediasWrapper()
 
-    const AdaptedFilterLib = new Adapter(this.medias, likes)
-    console.log(AdaptedFilterLib)
-    const FilteredMedias = await AdaptedFilterLib.filterByPopularity()
+    const FilterLib = new FilterV1(this.Medias, likes, date, title)
+    
+    const FilteredLikes = await FilterLib.filterByPopularity()
+    const FilteredDate = await FilterLib.filterByDate()
+    const FilteredTitle = await FilterLib.filterByTitle()
 
-    FilteredMedias.forEach(media => {
-        const Template = new MediaCardContent(media)
-        this.$mediasWrapper.appendChild(Template.createMediaCardContent())
+    FilteredLikes.forEach(Media => {
+        const Template = new MediaCardContent(Media)
+        this.$mediasWrapper.appendChild(Template.createMediaCardContent(Media))
+    })
+
+    FilteredDate.forEach(Media => {
+        const Template = new MediaCardContent(Media)
+        this.$mediasWrapper.appendChild(Template.createMediaCardContent(Media))
+    })
+
+    FilteredTitle.forEach(Media => {
+        const Template = new MediaCardContent(Media)
+        this.$mediasWrapper.appendChild(Template.createMediaCardContent(Media))
     })
 }
 
-onChangeFilter() {
-    this.$wrapper
-        .querySelector('form')
-        .addEventListener('change', e => {
-            const likes = e.target.value
-            console.log(e.target.value);
-            this.filterMedias(likes)
-        })
-}
+    onChangeFilter() {
+        this.$wrapper
+            .querySelector('form')
+            .addEventListener('change', e => {
+                const element = e.target.value
+                this.filterMedias(element)
+            })
+    }
 
-clearMediasWrapper() {
-    this.$mediasWrapper.innerHTML = ""
-}
+    clearMediasWrapper() {
+        this.$mediasWrapper.innerHTML = ""
+    }
 
-render(media) {
-    console.log(media);
-    const filterForm = `
-        <form class="filter-form" action="#" method="POST">
-            <label for="filter-select">Trier par : </label>
-            <select name="filter-select" id="filter-select">
-                <option value="">Aucun filtre</option>
-                <option value="${media.likes}">Popularity</option>
-                <option value="date">Date</option>
-                <option value="title">Title</option>
-            </select>
-        </form>
-    `
+    render() {
+        const filterForm = `
+            <form class="filter-form" action="#" method="POST">
+                <label for="filter-select">Trier par : </label>
+                <select name="filter-select" id="filter-select">
+                    <option value="">Aucun filtre</option>
+                    <option value="likes">Popularity</option>
+                    <option value="date">Date</option>
+                    <option value="title">Title</option>
+                </select>
+            </form>
+        `
 
     this.$wrapper.innerHTML = filterForm
     this.onChangeFilter()
