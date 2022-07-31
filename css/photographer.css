@@ -82,12 +82,12 @@ header {
 	position: relative;
 }
 
-.filter-form-wrapper{
+.sorter-form-wrapper{
 	position: absolute;
-	top: -90px;
+	/* top: -90px; */
 }
 
-.filter-form {
+.sorter-form {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -95,7 +95,7 @@ header {
 	margin-left: 10px;
 }
 
-#filter-select {
+#sorter-select {
 	padding: 7px;
 	margin-left: 10px;
 	border-radius: 5px;
