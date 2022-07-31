@@ -1,0 +1,20 @@
+class WhishListCounter {
+  constructor() {
+      this._count = 0
+      this._$favoriteCount = document.querySelector('.wish-count')
+
+  }
+
+  update(action) {
+
+      if (action === 'INC') {
+          this._count += 1
+      } else if (action === 'DEC') {
+          this._count -= 1
+      } else {
+          throw "Unknow action"
+      }
+
+      this._$favoriteCount.innerHTML = this._count
+  }
+}

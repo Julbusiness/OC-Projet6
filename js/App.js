@@ -7,6 +7,9 @@ class App {
 		this.$mediasWrapper = document.querySelector(".profil");
 		this.$portfolioWrapper = document.querySelector(".portfolio");
 		this.$stickyWrapper = document.querySelector(".sticky");
+
+		this.WishlistSubject = new WishlistSubject()
+		this.WhishListCounter = new WhishListCounter()
 	}
 
 	async main() {
@@ -49,7 +52,7 @@ class App {
 			const media = new Media(AllMedias);
 
 			AllMedias.forEach((media) => {
-				const Template = new MediaCardContent(media);
+				const Template = new MediaCardContent(media, this.WishlistSubject);
 				this.$portfolioWrapper.appendChild(
 					Template.createMediaCardContent(media)
 				);
@@ -88,13 +91,6 @@ class App {
 			/* ------------------------ création de la partie tri ----------------------- */
 			const Sorter = new SorterForm(AllMedias)
 			Sorter.render()
-
-			// AllMedias.forEach(movie => {
-			// 				const Template = new MediaCardContent(movie)
-			// 				this.$portfolioWrapper.appendChild(
-			// 						Template.createMediaCardContent()
-			// 				)
-			// })
 		}
 	}
 }

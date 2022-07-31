@@ -139,6 +139,7 @@ header {
 .media-like {
 	color: #901c1c;
 	font-size: 24px;
+	display: flex;
 }
 
 .favorite-input {
@@ -355,4 +356,30 @@ form input {
     left: 100px;
     color: #901c1c;
     font-size: 24px;
+}
+
+/* -------------------------------- wishlist -------------------------------- */
+
+.wish-btn {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	height: 30px;
+	padding: 4px;
+	width: 23px;
+	top: -4px;
+}
+
+.wish-btn path {
+	fill: transparent;
+	stroke-width: 6px;
+	stroke: #000;
+	transition: .4s;
+}
+
+.wish-btn.wished path  {
+	fill: #901c1c;;
+	stroke: #fff;
 }
