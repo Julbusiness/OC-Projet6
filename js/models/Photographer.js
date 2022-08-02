@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 class Photographer {
 	constructor(photographer) {
 		this._name = photographer.name;

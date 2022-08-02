@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 class App {
 	constructor() {
 		this.dataApi = new Api("/data/photographers.json");
@@ -8,8 +9,13 @@ class App {
 		this.$portfolioWrapper = document.querySelector(".portfolio");
 		this.$stickyWrapper = document.querySelector(".sticky");
 
-		this.WishlistSubject = new WishlistSubject()
-		this.WhishListCounter = new WhishListCounter()
+		// WishLib Pub/sub
+		const that = this;
+		console.log(that);
+		this.WishlistSubject = new WishlistSubject();
+		this.WhishListCounter = new WhishListCounter();
+
+		this.WishlistSubject.subscribe(this.WhishListCounter);
 	}
 
 	async main() {
@@ -49,7 +55,14 @@ class App {
 
 			const portfolioData = await this.dataApi.getPortfolioByUserId(userId);
 			const AllMedias = portfolioData.map((media) => new MediasFactory(media));
-			const media = new Media(AllMedias);
+
+			const sommeLikes = AllMedias.reduce((accumulateur, element) => {
+				return accumulateur + element.likes;
+			}, 0);
+
+			console.log(sommeLikes);
+
+			const media = new Media(AllMedias, sommeLikes);
 
 			AllMedias.forEach((media) => {
 				const Template = new MediaCardContent(media, this.WishlistSubject);
@@ -76,21 +89,16 @@ class App {
 
 			const lightbox = new Lightbox(AllMedias);
 			document
-				.querySelectorAll(".portfolio .media-card")
+				.querySelectorAll(".portfolio .wrapper .media-card")
 				.forEach((mediasDom) => {
 					mediasDom.addEventListener("click", (e) => {
 						lightbox.show(e.currentTarget.dataset.id);
 					});
 				});
 
-			/* ----------------------- création de la partie like ----------------------- */
-
-
-
-
 			/* ------------------------ création de la partie tri ----------------------- */
-			const Sorter = new SorterForm(AllMedias)
-			Sorter.render()
+			const Sorter = new SorterForm(AllMedias);
+			Sorter.render();
 		}
 	}
 }

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 class Lightbox {
 	constructor(listElement) {
 		this.currentElement = null;
@@ -5,6 +6,7 @@ class Lightbox {
 	}
 
 	show(id) {
+		console.log(id);
 		this.currentElement = this.getElementById(id);
 		this.display();
 		this.noScroll();

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 class MediaCardData {
 	constructor(photographer) {
 		this._photographer = photographer

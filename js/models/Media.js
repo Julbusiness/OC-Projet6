@@ -1,5 +1,5 @@
 class Media {
-	constructor(data) {
+	constructor(data, sommeLikes) {
 		this._id = data.id;
 		this._photographerId = data.photographerId;
 		this._title = data.title;
@@ -7,7 +7,7 @@ class Media {
 		this._date = data.date;
 		this._price = data.price;
 		this._description = data.description;
-		this._globalLikes = 297081;
+		this._globalLikes = sommeLikes;
 	}
 
 
@@ -48,6 +48,7 @@ class Media {
 	}
 }
 
+// eslint-disable-next-line no-unused-vars
 class Picture extends Media {
 	constructor(data) {
 		super(data);
@@ -74,6 +75,7 @@ class Picture extends Media {
 	}
 }
 
+// eslint-disable-next-line no-unused-vars
 class Video extends Media {
 	constructor(data) {
 		super(data);

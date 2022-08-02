@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 class SorterForm {
   constructor(Medias) {
       this.Medias = Medias
@@ -6,26 +7,37 @@ class SorterForm {
       this.$sorterFormWrapper = document.querySelector('.sorter-form-wrapper')
       this.$mediasWrapper = document.querySelector('.portfolio')
 
+      // eslint-disable-next-line no-undef
       this.ProxyRatingSorter = new ProxyRatingSorter()
   }
 
   async sorterMedias(sorter) {
       this.clearMediasWrapper()
 
-      if (!!sorter) {
-          // Vous pourrez supprimer cette ligne
-          // const sortedData = await RatingSorterApi.sorter(this.Medias, sorter)
+      if (sorter) {
 
           const sortedData = await this.ProxyRatingSorter.sorter(this.Medias, sorter)
 
           const SortedMedias = sortedData.data 
 
           SortedMedias.forEach(Media => {
+              // eslint-disable-next-line no-undef
               const Template = new MediaCardContent(Media)
               this.$mediasWrapper.appendChild(Template.createMediaCardContent())
           })
+
+          // eslint-disable-next-line no-undef
+          const lightbox = new Lightbox(this.Medias);
+          document
+              .querySelectorAll(".portfolio .wrapper .media-card")
+              .forEach((mediasDom) => {
+                  mediasDom.addEventListener("click", (e) => {
+                      lightbox.show(e.currentTarget.dataset.id);
+                  });
+              });
       } else {
           this.Medias.forEach(Media => {
+              // eslint-disable-next-line no-undef
               const Template = new MediaCardContent(Media)
               this.$mediasWrapper.appendChild(Template.createMediaCardContent())
           })

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 class MediaCardSticky {
 	constructor(photographer, media) {
 		this._photographer = photographer;
@@ -12,7 +13,7 @@ class MediaCardSticky {
 		return this._media;
 	}
 
-	createCardSticky(photographer, media) {
+	createCardSticky() {
 		this.$wrapperSticky = document.createElement("div");
 		this.$wrapperSticky.classList.add("sticky-card");
 

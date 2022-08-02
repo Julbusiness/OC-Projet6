@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 class WishlistSubject {
   constructor() {
       this._observers = []
@@ -5,13 +6,16 @@ class WishlistSubject {
 
   subscribe(observer) {
       this._observers.push(observer)
+
   }
 
   unsubscribe(observer) {
       this._observers = this._observers.filter(obs => obs !== observer)
   }
 
-  fire(action) {
-      this._observers.forEach(observer => observer.update(action))
+  fire(action, that) {
+      this._observers.forEach(observer => {
+        observer.update(action, that)})
+
   }
 }

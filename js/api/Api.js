@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 class Api {
 	constructor(url) {
 		this._url = url;

@@ -1,37 +1,40 @@
+/* eslint-disable no-unused-vars */
 class MediaCardContent {
 	constructor(media, WishlistSubject) {
 		this._media = media;
 		this.WishlistSubject = WishlistSubject;
 
-		this.$wrapperWrap = document.createElement("div");
-		this.$wrapperWrap.classList.add("wrap");
+		this.$wrapper = document.createElement("div");
+		this.$wrapper.classList.add("wrapper");
 
-		this.$wrapperContent = document.createElement("div");
-		this.$wrapperContent.classList.add("media-card");
-		this.$wrapperContent.setAttribute("data-id", `${this._media.id}`);
+		this.$wrapperImg = document.createElement("div");
+		this.$wrapperImg.classList.add("media-card");
+		this.$wrapperImg.setAttribute("data-id", `${this._media.id}`);
 
-		this.$wrapperPics = document.createElement("div");
-		this.$wrapperPics.classList.add("pics");
+		this.$wrapperInfos = document.createElement("div");
+		this.$wrapperInfos.classList.add("infos");
+	}
+
+	get media() {
+		return this._media
 	}
 
 	/* -------------------------------- fonctions ------------------------------- */
 	handleWishButton() {
-		const that = this;
-
-		this.$wrapperWrap
-			.querySelector(".wish-btn")
-			.addEventListener("click", function () {
-				if (this.classList.contains("wished")) {
-					this.classList.remove("wished");
-					console.log(that.WishListSubject.fire("DEC"));
-					that.WishListSubject.fire("DEC");
-				} else {
-					this.classList.add("wished");
-					console.log(that.WishListSubject.fire("INC"));
-					that.WishListSubject.fire("INC");
-				}
-			});
-	}
+		const that = this
+		
+		this.$wrapper
+				.querySelector('.wish-btn')
+				.addEventListener('click', function() {
+						if (this.classList.contains('wished')) {
+								this.classList.remove('wished')
+								that.WishlistSubject.fire('DEC', that)
+						} else {
+								this.classList.add('wished')
+								that.WishlistSubject.fire('INC', that)
+						}
+				})
+}
 
 	createMediaCardContent() {
 		const card = ` 
@@ -46,7 +49,7 @@ class MediaCardContent {
 		<div class="media-content">
 		<h2 class="media-title" tabindex="0">${this._media.title}</h2>
 		<div class="media-like favorite">
-			<span class="wish-count">${this._media.likes}</span>
+			<div class="wish-count">${this._media.likes}</div>
 			<div class="wish-btn">
 				<svg class="heart" viewBox="0 0 241.59736 220.05746">
 					<g transform="translate(-175.32265,-1696.4765)">
@@ -57,11 +60,11 @@ class MediaCardContent {
 			</div>
 		</div> 
 		`;
-		this.$wrapperWrap.appendChild(this.$wrapperContent);
-		this.$wrapperWrap.appendChild(this.$wrapperPics);
-		this.$wrapperContent.innerHTML = card;
-		this.$wrapperPics.innerHTML = cardContent;
+		this.$wrapper.appendChild(this.$wrapperImg);
+		this.$wrapper.appendChild(this.$wrapperInfos);
+		this.$wrapperImg.innerHTML = card;
+		this.$wrapperInfos.innerHTML = cardContent;
 		this.handleWishButton();
-		return this.$wrapperWrap;
+		return this.$wrapper;
 	}
 }

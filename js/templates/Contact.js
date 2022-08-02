@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 class Contact {
 	constructor(photograph) {
 		this._photograph = photograph;
@@ -40,8 +41,8 @@ class Contact {
 	enter() {
 		document.querySelectorAll(".input-recup").forEach((input) => {
 			console.log(input.value);
-			this.onCloseModal();
 		});
+		this.onCloseModal();
 	}
 
 	display() {
@@ -78,15 +79,15 @@ class Contact {
 
     `;
 
-		document.querySelector(".contact_button").addEventListener("click", () => {
-			this.onOpenModal();
-		});
+		this.onOpenModal();
 
 		document.querySelector(".btnClose").addEventListener("click", () => {
 			this.onCloseModal();
 		});
 
-		document.addEventListener("keydown", (e) => {
+		document
+		.querySelector('.contact_modal')
+		.addEventListener("keydown", (e) => {
 			switch (e.key) {
 				case "Escape":
 					this.onCloseModal();
