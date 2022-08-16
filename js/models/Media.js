@@ -1,5 +1,5 @@
 class Media {
-	constructor(data, sommeLikes) {
+	constructor(data) {
 		this._id = data.id;
 		this._photographerId = data.photographerId;
 		this._title = data.title;
@@ -7,7 +7,6 @@ class Media {
 		this._date = data.date;
 		this._price = data.price;
 		this._description = data.description;
-		this._globalLikes = sommeLikes;
 	}
 
 
@@ -39,10 +38,6 @@ class Media {
 		return this._description;
 	}
 
-	get globalLikes() {
-		return this._globalLikes;
-	}
-
 	get path() {
 		return this._path;
 	}
@@ -54,7 +49,7 @@ class Picture extends Media {
 		super(data);
 		this._type = "image";
 		this._image = data.image;
-		this._pathName = `assets/images/${data.photographerId}/${this._image}`;
+		this._pathName = `../assets/images/${data.photographerId}/${this._image}`;
 		this._format = "img";
 	}
 
@@ -81,7 +76,7 @@ class Video extends Media {
 		super(data);
 		this._type = "video";
 		this._video = data.video;
-		this._pathName = `assets/images/${data.photographerId}/${this._video}`;
+		this._pathName = `../assets/images/${data.photographerId}/${this._video}`;
 		this._format = "video"
 	}
 

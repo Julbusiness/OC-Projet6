@@ -6,7 +6,6 @@ class Lightbox {
 	}
 
 	show(id) {
-		console.log(id);
 		this.currentElement = this.getElementById(id);
 		this.display();
 		this.noScroll();
@@ -25,6 +24,8 @@ class Lightbox {
 			this.currentElement = this.listElement[0];
 		} else {
 			this.currentElement = this.listElement[index + 1];
+			console.log(index)
+			console.log(this.currentElement)
 		}
 		this.display();
 	}
@@ -59,13 +60,13 @@ class Lightbox {
 		// affiche le contenu de ma lightbox
 		document.querySelector(".content").innerHTML = `
 			<button class="close">
-				<img src="./assets/icons/closeLigthbox.svg" alt="">
+				<img src="../assets/icons/closeLigthbox.svg" alt="">
 			</button>
 			<button class="previous">
-				<img src="./assets/icons/chevron-letf.svg" alt="">
+				<img src="../assets/icons/chevron-letf.svg" alt="">
 			</button>
 			<button class="next">
-				<img src="./assets/icons/chevron-right.svg" alt="">
+				<img src="../assets/icons/chevron-right.svg" alt="">
 			</button>
 			<${this.currentElement.format} src="${this.currentElement.path}" alt="${this.currentElement.description}, ${this.currentElement.type}" class="picture" controls autoplay="true"/>
 			<h2 class="title">${this.currentElement.title}</h2>
@@ -73,8 +74,6 @@ class Lightbox {
 
 		// ajoute la class show en css (qui s'occupe du display block)
 		document.querySelector(".lightbox").classList.add("show");
-
-		// document.querySelector(".lightbox").classList.add("no-scroll");
 
 		// s'occupe de déclencher la fonction next au click
 		document.querySelector(".lightbox .next").addEventListener("click", () => {
@@ -101,18 +100,31 @@ class Lightbox {
 		});
 
 		// s'occupe de déclencher les fonctions next, previous, close aux touches de clavier
-		document.addEventListener("keydown", (e) => {
+		const body = document.querySelector('body')
+		body.addEventListener("keyup", keyboard)
+		const that = this
+		
+		function removeKeyboardEvent() {
+			body.removeEventListener("keyup", keyboard)
+		}
+
+		function keyboard(e){
 			switch (e.key) {
 				case "ArrowRight":
-					this.next();
+					that.next();
+					removeKeyboardEvent()
 					break;
 				case "ArrowLeft":
-					this.previous();
+					that.previous();
+					removeKeyboardEvent()
 					break;
 				case "Escape":
-					this.close();
+					that.close();
+					removeKeyboardEvent()
 					break;
 			}
-		});
+		}
+
 	}
+
 }

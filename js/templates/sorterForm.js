@@ -1,65 +1,68 @@
 // eslint-disable-next-line no-unused-vars
 class SorterForm {
-  constructor(Medias) {
-      this.Medias = Medias
+	constructor(Medias, wishlistSubject, sommeLikes) {
+		this.Medias = Medias;
+		this.wishlistSubject = wishlistSubject;
+		this.sommeLikes = sommeLikes;
 
-      this.$wrapper = document.createElement('div')
-      this.$sorterFormWrapper = document.querySelector('.sorter-form-wrapper')
-      this.$mediasWrapper = document.querySelector('.portfolio')
+		this.$wrapper = document.createElement("div");
+		this.$sorterFormWrapper = document.querySelector(".sorter-form-wrapper");
+		this.$mediasWrapper = document.querySelector(".portfolio");
 
-      // eslint-disable-next-line no-undef
-      this.ProxyRatingSorter = new ProxyRatingSorter()
-  }
+		// eslint-disable-next-line no-undef
+		this.ProxyRatingSorter = new ProxyRatingSorter();
+	}
 
-  async sorterMedias(sorter) {
-      this.clearMediasWrapper()
+	async sorterMedias(sorter) {
+		this.clearMediasWrapper();
 
-      if (sorter) {
+		if (sorter) {
+			const sortedData = await this.ProxyRatingSorter.sorter(
+				this.Medias,
+				sorter
+			);
 
-          const sortedData = await this.ProxyRatingSorter.sorter(this.Medias, sorter)
+			const SortedMedias = sortedData.data;
 
-          const SortedMedias = sortedData.data 
+			SortedMedias.forEach((Media) => {
+				// eslint-disable-next-line no-undef
+				const Template = new MediaCardContent(Media, this.wishlistSubject, this.sommeLikes);
+				this.$mediasWrapper.appendChild(Template.createMediaCardContent());
+				// eslint-disable-next-line no-undef
+				const lightbox = new Lightbox(SortedMedias);
+				document
+					.querySelectorAll(".portfolio .wrapper .media-card")
+					.forEach((mediasDom) => {
+						mediasDom.addEventListener("click", (e) => {
+							lightbox.show(e.currentTarget.dataset.id);
+						});
+					});
+			});
+		} else {
+			this.Medias.forEach((Media) => {
+				// eslint-disable-next-line no-undef
+				const Template = new MediaCardContent(Media);
+				this.$mediasWrapper.appendChild(Template.createMediaCardContent());
+			});
+		}
+	}
 
-          SortedMedias.forEach(Media => {
-              // eslint-disable-next-line no-undef
-              const Template = new MediaCardContent(Media)
-              this.$mediasWrapper.appendChild(Template.createMediaCardContent())
-          })
+	onChangeSorter() {
+		this.$wrapper.querySelector("form").addEventListener("change", (e) => {
+			const sorter = e.target.value;
+			this.sorterMedias(sorter);
+		});
+	}
 
-          // eslint-disable-next-line no-undef
-          const lightbox = new Lightbox(this.Medias);
-          document
-              .querySelectorAll(".portfolio .wrapper .media-card")
-              .forEach((mediasDom) => {
-                  mediasDom.addEventListener("click", (e) => {
-                      lightbox.show(e.currentTarget.dataset.id);
-                  });
-              });
-      } else {
-          this.Medias.forEach(Media => {
-              // eslint-disable-next-line no-undef
-              const Template = new MediaCardContent(Media)
-              this.$mediasWrapper.appendChild(Template.createMediaCardContent())
-          })
-      }
-  }
+	clearMediasWrapper() {
+		this.$mediasWrapper.innerHTML = "";
+		// Permet de remettre le nombre de like global a zero
+		const GlobalLikes = document.querySelector(".globalLikes");
+		GlobalLikes.innerHTML = this.sommeLikes;
+	}
 
-  onChangeSorter() {
-      this.$wrapper
-          .querySelector('form')
-          .addEventListener('change', e => {
-              const sorter = e.target.value
-              console.log(sorter);
-              this.sorterMedias(sorter)
-          })
-  }
-
-  clearMediasWrapper() {
-      this.$mediasWrapper.innerHTML = ""
-  }
-
-  render() {
-      const sorterForm = `
+	render() {
+		const sorterForm = `
           <form action="#" method="POST" class="sorter-form">
               <label for="sorter-select">Triez par : </label>
               <select name="sorter-select" id="sorter-select">
@@ -69,11 +72,11 @@ class SorterForm {
                   <option value="title">Title</option>
               </select>
           </form>
-      `
+      `;
 
-      this.$wrapper.innerHTML = sorterForm
-      this.onChangeSorter()
+		this.$wrapper.innerHTML = sorterForm;
+		this.onChangeSorter();
 
-      this.$sorterFormWrapper.appendChild(this.$wrapper)
-  }
+		this.$sorterFormWrapper.appendChild(this.$wrapper);
+	}
 }

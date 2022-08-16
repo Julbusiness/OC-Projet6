@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 class Photographer {
-	constructor(photographer) {
+	constructor(photographer, sommeLikes) {
 		this._name = photographer.name;
 		this._id = photographer.id;
 		this._city = photographer.city;
@@ -37,7 +37,7 @@ class Photographer {
 	}
 
 	get portrait() {
-		return `/assets/photographers/${this._portrait}`;
+		return `../assets/photographers/${this._portrait}`;
 	}
 
 }

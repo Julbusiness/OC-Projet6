@@ -38,11 +38,10 @@ class Contact {
 		document.querySelector(".contact_button").focus();
 	}
 
-	enter() {
+	resultLog() {
 		document.querySelectorAll(".input-recup").forEach((input) => {
 			console.log(input.value);
 		});
-		this.onCloseModal();
 	}
 
 	display() {
@@ -85,21 +84,31 @@ class Contact {
 			this.onCloseModal();
 		});
 
-		document
-		.querySelector('.contact_modal')
-		.addEventListener("keydown", (e) => {
+		const that = this;
+		const modal = document.querySelector(".modal");
+
+		const onKeydown = function (e) {
+			console.log(e.key)
 			switch (e.key) {
 				case "Escape":
-					this.onCloseModal();
+					that.onCloseModal();
 					break;
 				case "Enter":
-					this.enter();
+					that.resultLog();
+					e.preventDefault();
+					e.stopPropagation();
+					that.onCloseModal();
 					break;
 			}
-		});
+		};
 
-		document.querySelector("#send").addEventListener("click", () => {
-			this.enter();
-		});
+		modal.addEventListener("keydown", onKeydown);
+		
+		const btnPushAction = () => {
+			this.resultLog();
+			this.onCloseModal();
+		};
+
+		document.querySelector("#send").addEventListener("click", btnPushAction);
 	}
 }

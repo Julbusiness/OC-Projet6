@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 class MediaCardContent {
-	constructor(media, WishlistSubject) {
+	constructor(media, WishlistSubject, sommeLikes) {
 		this._media = media;
 		this.WishlistSubject = WishlistSubject;
+		this.sommeLikes = sommeLikes;
 
 		this.$wrapper = document.createElement("div");
 		this.$wrapper.classList.add("wrapper");
@@ -18,6 +19,7 @@ class MediaCardContent {
 	get media() {
 		return this._media
 	}
+
 
 	/* -------------------------------- fonctions ------------------------------- */
 	handleWishButton() {
@@ -60,6 +62,7 @@ class MediaCardContent {
 			</div>
 		</div> 
 		`;
+
 		this.$wrapper.appendChild(this.$wrapperImg);
 		this.$wrapper.appendChild(this.$wrapperInfos);
 		this.$wrapperImg.innerHTML = card;
