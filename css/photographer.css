@@ -261,10 +261,10 @@ form input {
 .sticky-card {
 	display: flex;
 	position: absolute;
-	right: 20px;
+	right: -5px;
 	bottom: 0;
 	align-items: center;
-	width: 375px;
+	width: 350px;
 	height: 70px;
 	background: #d88876;
 	border-radius: 5px;

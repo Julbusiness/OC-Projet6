@@ -50,7 +50,7 @@ class MediaCardData {
 		this.$wrapperHeader.innerHTML = MediaCard;
 		this.$wrapperSticky.innerHTML = stickyCard;
 		this.$wrapper.appendChild(this.$wrapperHeader)
-		this.$wrapper.appendChild(this.$wrapperSticky);
+		this.$sticky.appendChild(this.$wrapperSticky);
 
 		return this.$wrapper;
 	}
