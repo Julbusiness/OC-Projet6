@@ -3,6 +3,7 @@ class Lightbox {
 	constructor(listElement) {
 		this.currentElement = null;
 		this.listElement = listElement;
+		console.log(this.listElement)
 	}
 
 	show(id) {
@@ -24,9 +25,8 @@ class Lightbox {
 			this.currentElement = this.listElement[0];
 		} else {
 			this.currentElement = this.listElement[index + 1];
-			console.log(index)
-			console.log(this.currentElement)
 		}
+		console.log(this.currentElement.title)
 		this.display();
 	}
 

@@ -88,7 +88,6 @@ class Contact {
 		const modal = document.querySelector(".modal");
 
 		const onKeydown = function (e) {
-			console.log(e.key)
 			switch (e.key) {
 				case "Escape":
 					that.onCloseModal();

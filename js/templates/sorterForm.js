@@ -30,11 +30,15 @@ class SorterForm {
 				this.$mediasWrapper.appendChild(Template.createMediaCardContent());
 				// eslint-disable-next-line no-undef
 				const lightbox = new Lightbox(SortedMedias);
+				console.log(lightbox)
+
 				document
 					.querySelectorAll(".portfolio .wrapper .media-card")
 					.forEach((mediasDom) => {
+						// console.log(mediasDom)
 						mediasDom.addEventListener("click", (e) => {
 							lightbox.show(e.currentTarget.dataset.id);
+							// console.log(e.currentTarget.dataset.id);
 						});
 					});
 			});
