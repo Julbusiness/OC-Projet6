@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 class WhishListCounter {
 	constructor() {
 		this._count = 0;
@@ -27,7 +27,5 @@ class WhishListCounter {
 
 		// Inc ou Dec sur les likes globaux
 		GlobalLikes.innerHTML = that.sommeLikes + this._count;
-		// console.log(GlobalLikes.textContent);
-		// console.log(this._count);
 	}
 }

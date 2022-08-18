@@ -1,9 +1,8 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 class Lightbox {
 	constructor(listElement) {
 		this.currentElement = null;
 		this.listElement = listElement;
-		console.log(this.listElement)
 	}
 
 	show(id) {
@@ -68,12 +67,13 @@ class Lightbox {
 			<button class="next">
 				<img src="../assets/icons/chevron-right.svg" alt="">
 			</button>
-			<${this.currentElement.format} src="${this.currentElement.path}" alt="${this.currentElement.description}, ${this.currentElement.type}" class="picture" controls autoplay="true"/>
-			<h2 class="title">${this.currentElement.title}</h2>
+			<${this.currentElement.format} src="${this.currentElement.path}" alt="${this.currentElement.description}, ${this.currentElement.type}" tabindex="0" class="picture" controls autoplay="true"/>
+			<h2 class="title" tabindex="0">${this.currentElement.title}</h2>
 			`;
-
-		// ajoute la class show en css (qui s'occupe du display block)
-		document.querySelector(".lightbox").classList.add("show");
+		
+			
+			// ajoute la class show en css (qui s'occupe du display block)
+			document.querySelector(".lightbox").classList.add("show");
 
 		// s'occupe de déclencher la fonction next au click
 		document.querySelector(".lightbox .next").addEventListener("click", () => {

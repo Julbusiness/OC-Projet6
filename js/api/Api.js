@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 class Api {
 	constructor(url) {
 		this._url = url;
@@ -23,7 +23,6 @@ class Api {
 			const photographer = responseJSON.photographers.find(
 				(photographer) => photographer.id === userId
 			);
-			// console.log(responseJSON.photographers.find((photographer) => photographer.id))
 
 			return photographer;
 		} catch (err) {

@@ -1,4 +1,5 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 class SorterForm {
 	constructor(Medias, wishlistSubject, sommeLikes) {
 		this.Medias = Medias;
@@ -9,7 +10,7 @@ class SorterForm {
 		this.$sorterFormWrapper = document.querySelector(".sorter-form-wrapper");
 		this.$mediasWrapper = document.querySelector(".portfolio");
 
-		// eslint-disable-next-line no-undef
+
 		this.ProxyRatingSorter = new ProxyRatingSorter();
 	}
 
@@ -25,12 +26,12 @@ class SorterForm {
 			const SortedMedias = sortedData.data;
 
 			SortedMedias.forEach((Media) => {
-				// eslint-disable-next-line no-undef
+
 				const Template = new MediaCardContent(Media, this.wishlistSubject, this.sommeLikes);
 				this.$mediasWrapper.appendChild(Template.createMediaCardContent());
-				// eslint-disable-next-line no-undef
+
 				const lightbox = new Lightbox(SortedMedias);
-				console.log(lightbox)
+				// console.log(lightbox)
 
 				document
 					.querySelectorAll(".portfolio .wrapper .media-card")
@@ -45,8 +46,19 @@ class SorterForm {
 		} else {
 			this.Medias.forEach((Media) => {
 				// eslint-disable-next-line no-undef
-				const Template = new MediaCardContent(Media);
+
+				const Template = new MediaCardContent(Media, this.wishlistSubject, this.sommeLikes);
 				this.$mediasWrapper.appendChild(Template.createMediaCardContent());
+
+				const lightbox = new Lightbox(this.Medias);
+
+				document
+					.querySelectorAll(".portfolio .wrapper .media-card")
+					.forEach((mediasDom) => {
+						mediasDom.addEventListener("click", (e) => {
+							lightbox.show(e.currentTarget.dataset.id);
+						});
+					});
 			});
 		}
 	}

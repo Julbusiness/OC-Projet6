@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 class MediaCardData {
 	constructor(photographer, AllMedias, sommeLikes) {
 		this._photographer = photographer;
@@ -27,24 +27,24 @@ class MediaCardData {
 		const MediaCard = `
 
     <div class="info-section">
-      <h1>${photograph.name}</h1>
-      <p class="local-header">${photograph.city}, ${photograph.country}</p>
-      <p class="tagline-header">${photograph.tagline}</p>
+      <h1 tabindex="0">${photograph.name}</h1>
+      <p class="local-header" tabindex="0">${photograph.city}, ${photograph.country}</p>
+      <p class="tagline-header" tabindex="0">${photograph.tagline}</p>
     </div>
     <div class="button-section">
       <button class="contact_button" aria-label="contact me">Contactez-moi</button>
     </div>
     <div class="image-header-section">
-      <img class="img-header" src="${photograph.portrait}" alt="${photograph.name}">
+      <img class="img-header" tabindex="0" src="${photograph.portrait}" alt="${photograph.name}">
     </div>
 
 		`
 
 		const stickyCard = `
 
-    <span class="globalLikes">${this.sommeLikes}</span>
+    <span class="globalLikes" tabindex="0">${this.sommeLikes}</span>
     <span><i class="fa fa-solid fa-heart fa-sm" arial-label="likes"></i></span>
-    <span class="price">${this._photographer.price}€ / jour</span>
+    <span class="price" tabindex="0">${this._photographer.price}€ / jour</span>
     `;
 
 		this.$wrapperHeader.innerHTML = MediaCard;

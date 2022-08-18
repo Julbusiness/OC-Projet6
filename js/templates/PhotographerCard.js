@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 class PhotographerCard {
   constructor(photographer) {
     this._photographer = photographer

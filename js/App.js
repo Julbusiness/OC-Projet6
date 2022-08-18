@@ -84,6 +84,7 @@ class App {
 			.forEach((mediasDom) => {
 				mediasDom.addEventListener("click", (e) => {
 					lightbox.show(e.currentTarget.dataset.id);
+					document.querySelector(".picture").focus();
 				});
 			});
 			

@@ -1,4 +1,5 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 class ProxyRatingSorter {
   constructor() {
       this.cache = []
@@ -12,7 +13,6 @@ class ProxyRatingSorter {
       return cachedResult
     }
 
-    // eslint-disable-next-line no-undef
     const data = await RatingSorterApi.sorter(medias, sortBy)
 
     this.cache.push(data)
