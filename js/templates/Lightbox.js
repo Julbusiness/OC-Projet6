@@ -20,15 +20,11 @@ class Lightbox {
 		let index = this.listElement.findIndex(
 			(element) => element.id == this.currentElement.id
 		);
-		console.log(index);
 		if (index == this.listElement.length - 1) {
-			console.log("ici 1");
 			this.currentElement = this.listElement[0];
 		} else {
-			console.log("ici 2");
 			this.currentElement = this.listElement[index + 1];
 		}
-		console.log(this.currentElement.title);
 		this.display();
 	}
 
@@ -62,13 +58,13 @@ class Lightbox {
 		// affiche le contenu de ma lightbox
 		document.querySelector(".content").innerHTML = `
 			<button class="close">
-				<img src="../assets/icons/closeLigthbox.svg" alt="">
+				<img src="../assets/icons/closeLigthbox.svg" alt="close dialog">
 			</button>
 			<button class="previous">
-				<img src="../assets/icons/chevron-letf.svg" alt="">
+				<img src="../assets/icons/chevron-letf.svg" alt="Previous image">
 			</button>
 			<button class="next">
-				<img src="../assets/icons/chevron-right.svg" alt="">
+				<img src="../assets/icons/chevron-right.svg" alt="Next image">
 			</button>
 			<${this.currentElement.format} src="${this.currentElement.path}" alt="${this.currentElement.description}, ${this.currentElement.type}" tabindex="0" class="picture" controls autoplay="true"/>
 			<h2 class="title" tabindex="0">${this.currentElement.title}</h2>

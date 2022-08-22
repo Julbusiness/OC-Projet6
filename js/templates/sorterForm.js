@@ -83,9 +83,9 @@ class SorterForm {
               <label for="sorter-select">Triez par : </label>
               <select name="sorter-select" id="sorter-select">
                   <option value="">Aucun tri</option>
-                  <option value="likes">Popularity</option>
+                  <option value="likes">Popularité</option>
                   <option value="date">Date</option>
-                  <option value="title">Title</option>
+                  <option value="title">Titre</option>
               </select>
           </form>
       `;

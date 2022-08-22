@@ -13,7 +13,7 @@ header {
 }
 
 .logo {
-	margin: 0;
+	margin-left: 0px;
 }
 
 /* --------------------------------- Header --------------------------------- */
@@ -80,27 +80,6 @@ header {
 	margin-top: 100px;
 	justify-content: center;
 	position: relative;
-}
-
-.sorter-form-wrapper{
-	position: absolute;
-	/* top: -90px; */
-}
-
-.sorter-form {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	margin-left: 10px;
-}
-
-#sorter-select {
-	padding: 7px;
-	margin-left: 10px;
-	border-radius: 5px;
-	background: #901c1c;
-	color: #fff;
 }
 
 .media-card {
@@ -359,6 +338,37 @@ form input {
     color: #901c1c;
     font-size: 24px;
 }
+
+/* -------------------------------- Tri -------------------------------- */
+
+.sorter-form-wrapper{
+	position: absolute;
+	/* top: -90px; */
+}
+
+.sorter-form {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+#sorter-select {
+	padding: 7px;
+	margin-left: 20px;
+	border-radius: 5px;
+	background: #901c1c;
+	color: #fff;
+	width: 150px;
+}
+
+
+form label {
+	font-size: 18px;
+	font-weight: bold;
+	align-items: left;
+}
+
 
 /* -------------------------------- wishlist -------------------------------- */
 
