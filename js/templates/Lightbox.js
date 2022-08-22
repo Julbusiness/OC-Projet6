@@ -20,12 +20,15 @@ class Lightbox {
 		let index = this.listElement.findIndex(
 			(element) => element.id == this.currentElement.id
 		);
+		console.log(index);
 		if (index == this.listElement.length - 1) {
+			console.log("ici 1");
 			this.currentElement = this.listElement[0];
 		} else {
+			console.log("ici 2");
 			this.currentElement = this.listElement[index + 1];
 		}
-		console.log(this.currentElement.title)
+		console.log(this.currentElement.title);
 		this.display();
 	}
 
@@ -70,10 +73,9 @@ class Lightbox {
 			<${this.currentElement.format} src="${this.currentElement.path}" alt="${this.currentElement.description}, ${this.currentElement.type}" tabindex="0" class="picture" controls autoplay="true"/>
 			<h2 class="title" tabindex="0">${this.currentElement.title}</h2>
 			`;
-		
-			
-			// ajoute la class show en css (qui s'occupe du display block)
-			document.querySelector(".lightbox").classList.add("show");
+
+		// ajoute la class show en css (qui s'occupe du display block)
+		document.querySelector(".lightbox").classList.add("show");
 
 		// s'occupe de déclencher la fonction next au click
 		document.querySelector(".lightbox .next").addEventListener("click", () => {
@@ -87,44 +89,45 @@ class Lightbox {
 				this.previous();
 			});
 
+		const body = document.querySelector("body");
+
+		body.addEventListener("keyup", keyboard);
+		const that = this;
+
+		function removeKeyboardEvent() {
+			body.removeEventListener("keyup", keyboard);
+		}
+
 		// s'occupe de déclencher la fonction close au click sur la croix
 		document.querySelector(".lightbox .close").addEventListener("click", () => {
 			this.close();
+			removeKeyboardEvent();
 		});
 
 		// s'occupe de déclencher la fonction close au click sur la lightbox partie grisée en dehors de l'image
 		document.querySelector(".lightbox").addEventListener("click", (e) => {
 			if (e.target == e.currentTarget) {
 				this.close();
+				removeKeyboardEvent();
 			}
 		});
 
 		// s'occupe de déclencher les fonctions next, previous, close aux touches de clavier
-		const body = document.querySelector('body')
-		body.addEventListener("keyup", keyboard)
-		const that = this
-		
-		function removeKeyboardEvent() {
-			body.removeEventListener("keyup", keyboard)
-		}
-
-		function keyboard(e){
+		function keyboard(e) {
 			switch (e.key) {
 				case "ArrowRight":
 					that.next();
-					removeKeyboardEvent()
+					removeKeyboardEvent();
 					break;
 				case "ArrowLeft":
 					that.previous();
-					removeKeyboardEvent()
+					removeKeyboardEvent();
 					break;
 				case "Escape":
 					that.close();
-					removeKeyboardEvent()
+					removeKeyboardEvent();
 					break;
 			}
 		}
-
 	}
-
 }
